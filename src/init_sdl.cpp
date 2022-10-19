@@ -29,8 +29,8 @@ void create_sdl_components(SDLInfo &sdl_info, int window_width, int window_heigh
 {
 	constexpr int WINDOW_FLAGS = 0;
 
-	sdl_info.window = SDL_CreateWindow("Class 605.688", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window_width, window_height, WINDOW_FLAGS);
-
+	sdl_info.window = SDL_CreateWindow("Class 605.688: Computer Gaming Engines", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window_width, window_height, WINDOW_FLAGS);
+	
 	if( sdl_info.window == nullptr ) 
 	{
 		std::cout << "Error initializing SDL Window" << SDL_GetError() << std::endl;

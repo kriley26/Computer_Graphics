@@ -19,9 +19,11 @@ namespace cge
 void init_sdl_image();
 
 SDLTextureInfo create_texture(const SDLInfo& sdl_info, const std::string &filepath);
+SDLTextureInfo update_texture(const SDLInfo& sdl_info, const SDLTextureInfo& sdl_texture, const std::string &filepath);
 void destroy_texture(const SDLTextureInfo& texture_info);
 
 void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo &texture_info, int x_pos, int y_pos, std::optional<SDLTextureOptions> texture_mods = std::nullopt);
+void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo &texture_info, int x_pos, int y_pos, double angle, SDL_RendererFlip flip, std::optional<SDLTextureOptions> texture_mods = std::nullopt);
 
 } // namespace cge
 

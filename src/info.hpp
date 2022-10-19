@@ -24,7 +24,11 @@ enum class EventType
 {
 	PLAY_SOUND,
 	TOGGLE_MUSIC,
-	QUIT
+	QUIT,
+	UP, 
+	DOWN,
+	RIGHT,
+	LEFT
 };
 
 struct SDLEventInfo

@@ -39,6 +39,22 @@ SDLEventInfo get_current_events()
 					case SDLK_m: 
 						event_info.events[num_events++] = EventType::TOGGLE_MUSIC;
 						break;
+					case SDLK_w:
+					case SDLK_UP:
+						event_info.events[num_events++] = EventType::UP;
+						break;
+					case SDLK_a:
+					case SDLK_LEFT:
+						event_info.events[num_events++] = EventType::LEFT;
+						break;
+					case SDLK_s:
+					case SDLK_DOWN:
+						event_info.events[num_events++] = EventType::DOWN;
+						break;
+					case SDLK_d:
+					case SDLK_RIGHT:
+						event_info.events[num_events++] = EventType::RIGHT;
+						break;
 					default:
 						break;
 				}

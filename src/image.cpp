@@ -42,8 +42,7 @@ SDLTextureInfo create_texture(const SDLInfo &sdl_info, const std::string &filepa
 	{
 		std::cout << "Failed to load texture [" << corrected_filepath << "]: "
 				  << IMG_GetError() << std::endl;
-	} 
-	else std::cout << "Loaded texture [" << corrected_filepath << "]" << std::endl;
+	}
 	
 
 	// https://wiki.libsdl.org/SDL_QueryTexture
@@ -55,12 +54,42 @@ SDLTextureInfo create_texture(const SDLInfo &sdl_info, const std::string &filepa
 	return result;
 }
 
+SDLTextureInfo update_texture(const SDLInfo& sdl_info, const SDLTextureInfo &sdl_texture, const std::string &filepath) {
+    SDLTextureInfo result = SDLTextureInfo(sdl_texture);
+    
+    std::string corrected_filepath(filepath);
+    
+#ifdef __BUILD_WIN__
+    replace_all(corrected_filepath, "/", "\\");
+#endif
+    
+    result.texture = IMG_LoadTexture(sdl_info.renderer, corrected_filepath.c_str());
+    if( result.texture == nullptr )
+    {
+        std::cout << "Failed to load texture [" << corrected_filepath << "]: "
+                  << IMG_GetError() << std::endl;
+    }
+    
+
+    // https://wiki.libsdl.org/SDL_QueryTexture
+    if( SDL_QueryTexture(result.texture, NULL, NULL, &result.width, &result.height) != 0 )
+    {
+        std::cout << "Failed to query texture [" << corrected_filepath << "]: " << SDL_GetError() << std::endl;
+    }
+    
+    return result;
+}
+
 void destroy_texture(const SDLTextureInfo& texture_info)
 {
 	SDL_DestroyTexture(texture_info.texture);
 }
 
-void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo &texture_info, int x_pos, int y_pos, std::optional<SDLTextureOptions> texture_mods)
+void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo& texture_info, int x_pos, int y_pos, std::optional<SDLTextureOptions> texture_mods) {
+	render_texture(sdl_info, texture_info, x_pos, y_pos, NULL, SDL_FLIP_NONE, texture_mods);
+}
+
+void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo &texture_info, int x_pos, int y_pos, double angle, SDL_RendererFlip flip, std::optional<SDLTextureOptions> texture_mods)
 {
 	SDL_Rect rect;
 	rect.x = x_pos;
@@ -97,7 +126,7 @@ void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo &texture_info,
 		rect.h = texture_info.height;
 	}
 
-	SDL_RenderCopy(sdl_info.renderer, texture_info.texture, NULL, &rect);
+	SDL_RenderCopyEx(sdl_info.renderer, texture_info.texture, NULL, &rect, angle, NULL, flip);
 }
 
 } // namespace cge

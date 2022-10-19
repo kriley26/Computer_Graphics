@@ -38,8 +38,8 @@
 		42B1EA2A281AB2DF00836A74 /* input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
 		42B1EA2B281AB2DF00836A74 /* image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = image.hpp; sourceTree = "<group>"; };
 		42B1EA2C281AB2DF00836A74 /* preprocessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = preprocessor.h; sourceTree = "<group>"; };
-		6C34625728EBA42600D3D307 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../usr/local/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
-		6C34625C28EBA59200D3D307 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../../usr/local/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
+		6C34625728EBA42600D3D307 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		6C34625C28EBA59200D3D307 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		6C34625E28EBA5D400D3D307 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +82,7 @@
 				6C34625728EBA42600D3D307 /* libSDL2-2.0.0.dylib */,
 			);
 			name = Frameworks;
+			path = ../../../../../usr/local/lib;
 			sourceTree = "<group>";
 		};
 		42B1EA24281AB2DF00836A74 /* src */ = {
