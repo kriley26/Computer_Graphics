@@ -72,4 +72,17 @@ namespace cge {
 
 		return xSum + ySum;
 	}
+
+    void Vector::reverseDirection(Direction d) {
+        switch (d) {
+            case X_DIR:
+                x = -x;
+                break;
+            case Y_DIR:
+                y = -y;
+                break;
+            default:
+                break;
+        }
+    }
 }

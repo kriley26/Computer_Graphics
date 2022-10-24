@@ -41,6 +41,7 @@ namespace cge {
 		path = t1.get_motion(1);
 		x = x1;
 		y = y1;
+        box = Box(x, x+width1, y, y+height1);
 		dir = 1;
         screenWidth = scrW;
         screenHeight = scrH;
@@ -80,9 +81,40 @@ namespace cge {
 		}
 	}
 
+    void Sprite::detectCollision(Sprite s) {
+        //Check if sprite is overlapping in x direction & reverse direction
+        // Left Hand Check
+        std::cout << box.getMaxY() << " " << s.box.getMinX() << endl;
+        if (box.getMaxX() >= s.box.getMinX() && box.getMaxX() < s.box.getMaxX()) {
+            std::cout<< "Left" << std::endl;
+            v.reverseDirection(Vector::X_DIR);
+        } // Right Hand Check
+        else if (box.getMinX() <= s.box.getMaxX() && box.getMinX() > s.box.getMinX()) {
+            std::cout<< "right" << std::endl;
+            v.reverseDirection(Vector::X_DIR);
+        } // Top Check
+        else if (box.getMaxY() >= s.box.getMinY() && box.getMaxY() < s.box.getMaxY()) {
+            std::cout<< "up" << std::endl;
+            v.reverseDirection(Vector::Y_DIR);
+        }
+        else if (box.getMinY() >= s.box.getMaxY() && box.getMinY() > s.box.getMinY()) {
+            std::cout<< "down" << std::endl;
+            v.reverseDirection(Vector::Y_DIR);
+        }
+//        if (box.getMinX() <= s.box.getMaxX() && box.getMaxX() >= s.box.getMinX()) {
+//            std::cout << "Detect Collision: X" << std::endl;
+//            v.reverseDirection(Vector::X_DIR);
+//        } else if (box.getMinY() <= s.box.getMaxY() && box.getMaxY() >= s.box.getMinY()) {
+//            std::cout << "Detect Collision: Y" << std::endl;
+//            v.reverseDirection(Vector::Y_DIR);
+//        }
+    }
+
 	void Sprite::update_sprite() {
 		x = x + v.getX();
 		y = y + v.getY();
+        
+        box.updateValues(v.getX(), v.getY());
 
 		if (x + sto.width >= screenWidth || x <= 0) {
 			v.setX(-v.getX());
@@ -101,16 +133,13 @@ namespace cge {
 
 	void Sprite::draw_sprite() {        
         Texture* t = &texture;
-        cout << &sti << endl;
         if (t != nullptr && v.getX() != 0) {
             sti = update_texture(si, sti, texture.get_motion(2));
         } else if (t != nullptr && v.getY() < 0) {
             sti = update_texture(si, sti, texture.get_motion(3));
         } else {
-            std::cout << "no movement" << std::endl;
             sti = update_texture(si, sti, texture.get_motion(1));
         }
-        cout << &sti << endl;
         
 		if (face_backwards) {
 			render_texture(si, sti, x, y, angle, SDL_FLIP_HORIZONTAL, sto);
