@@ -41,6 +41,7 @@ namespace cge {
 		path = t1.get_motion(1);
 		x = x1;
 		y = y1;
+        box = Box(x, x+width1, y, y+height1);
 		dir = 1;
         screenWidth = scrW;
         screenHeight = scrH;
@@ -80,6 +81,12 @@ namespace cge {
 		}
 	}
 
+    void Sprite::detectCollision(const Sprite s) {
+        //Check if sprite is overlapping in x direction & reverse direction
+        
+        //Check if sprite is overlapping in y direction & reverse direction
+    }
+
 	void Sprite::update_sprite() {
 		x = x + v.getX();
 		y = y + v.getY();
@@ -101,13 +108,11 @@ namespace cge {
 
 	void Sprite::draw_sprite() {        
         Texture* t = &texture;
-        cout << &sti << endl;
         if (t != nullptr && v.getX() != 0) {
             sti = update_texture(si, sti, texture.get_motion(2));
         } else if (t != nullptr && v.getY() < 0) {
             sti = update_texture(si, sti, texture.get_motion(3));
         } else {
-            std::cout << "no movement" << std::endl;
             sti = update_texture(si, sti, texture.get_motion(1));
         }
         cout << &sti << endl;

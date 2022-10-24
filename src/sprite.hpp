@@ -15,6 +15,7 @@ Author: Keegan Riley
 #include "src/vector.hpp"
 #include "src/texture.hpp"
 #include "src/movement.hpp"
+#include "src/box.hpp"
 
 namespace cge {
 	class Sprite
@@ -35,6 +36,7 @@ namespace cge {
 		SDLTextureOptions sto;
 		Vector v;
 		Texture texture;
+        Box box;
 
 	public:
 		Sprite(int x1, int y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1);
@@ -44,6 +46,7 @@ namespace cge {
 		void sleep(int milliseconds);
 		void updateVector();
 		void passVector(Vector v1);
+        void detectCollision(Sprite s);
 		void update_sprite();
 		void draw_sprite();
 	};
