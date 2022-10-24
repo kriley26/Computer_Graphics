@@ -40,4 +40,11 @@ namespace cge {
     float Box::getMaxY() {
         return maxY;
     }
+
+    void Box::updateValues(float x1, float y1) {
+        minX = minX + x1;
+        maxX = maxX + x1;
+        minY = minY + y1;
+        maxY = maxY + y1;
+    }
 }

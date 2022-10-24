@@ -22,6 +22,10 @@ namespace cge {
         float y = 0.0;
 
 	public:
+        enum Direction {
+            X_DIR,
+            Y_DIR
+        };
 		Vector();
 		Vector(float x1, float y1);
 		~Vector();
@@ -34,6 +38,7 @@ namespace cge {
 		Vector addVector(Vector v);
 		void scale(int var);
 		float dotProd(Vector v);
+        void reverseDirection(Direction d);
 	};
 }
 

@@ -28,6 +28,7 @@ namespace cge {
         float getMaxX();
         float getMinY();
         float getMaxY();
+        void updateValues(float x1, float y1);
     };
 }
 

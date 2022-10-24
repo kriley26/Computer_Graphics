@@ -137,6 +137,9 @@ int main(int argc, char *argv[])
 		}
 
 		if (get_time(since_update, updateSpeed)) {
+            s1.detectCollision(s3);
+            s2.detectCollision(s3);
+            
 			s1.update_sprite();
 			s2.update_sprite();
 			updateCount++;

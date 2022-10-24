@@ -46,6 +46,7 @@ namespace cge {
 		void sleep(int milliseconds);
 		void updateVector();
 		void passVector(Vector v1);
+        Box getOutline();
         void detectCollision(Sprite s);
 		void update_sprite();
 		void draw_sprite();
