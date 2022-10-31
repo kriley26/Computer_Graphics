@@ -23,6 +23,11 @@ void init_sdl()
 		std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
 		exit(1);
 	}
+    
+    if (SDL_Init(SDL_INIT_AUDIO) != 0) {
+        std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
+        exit(1);
+    }
 }
 
 void create_sdl_components(SDLInfo &sdl_info, int window_width, int window_height)
