@@ -16,6 +16,8 @@
 		6C89D4C7290656DA00FC1038 /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C89D4C5290656DA00FC1038 /* box.cpp */; };
 		6C89D4CF290F600A00FC1038 /* libSDL2_mixer-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C89D4CE290F600A00FC1038 /* libSDL2_mixer-2.0.0.dylib */; };
 		6C89D4D2290F606800FC1038 /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C89D4D1290F606800FC1038 /* sound.cpp */; };
+		6C89D4D5291830E500FC1038 /* save_tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C89D4D4291830E500FC1038 /* save_tool.cpp */; };
+		6C89D4DA2919AC1400FC1038 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C89D4D92919AC1400FC1038 /* jsoncpp.cpp */; };
 		6CB1824F29005BE8007FF0C5 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1824629005BE7007FF0C5 /* sprite.cpp */; };
 		6CB1825029005BE8007FF0C5 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1824829005BE7007FF0C5 /* vector.cpp */; };
 		6CB1825129005BE8007FF0C5 /* movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1824B29005BE8007FF0C5 /* movement.cpp */; };
@@ -51,9 +53,6 @@
 		6C34625E28EBA5D400D3D307 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
 		6C89D4C5290656DA00FC1038 /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box.cpp; sourceTree = "<group>"; };
 		6C89D4C6290656DA00FC1038 /* box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = box.hpp; sourceTree = "<group>"; };
-		6C89D4CE290F600A00FC1038 /* libSDL2_mixer-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libSDL2_mixer-2.0.0.dylib"; sourceTree = "<group>"; };
-		6C89D4D0290F606800FC1038 /* sound.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sound.hpp; sourceTree = "<group>"; };
-		6C89D4D1290F606800FC1038 /* sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
 		6CB1824529005BE7007FF0C5 /* player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
 		6CB1824629005BE7007FF0C5 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		6CB1824729005BE7007FF0C5 /* texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
@@ -113,8 +112,6 @@
 		42B1EA24281AB2DF00836A74 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				6C89D4D1290F606800FC1038 /* sound.cpp */,
-				6C89D4D0290F606800FC1038 /* sound.hpp */,
 				6C89D4C5290656DA00FC1038 /* box.cpp */,
 				6C89D4C6290656DA00FC1038 /* box.hpp */,
 				6CB1824B29005BE8007FF0C5 /* movement.cpp */,
@@ -198,6 +195,7 @@
 			files = (
 				42B1EA2E281AB2DF00836A74 /* input.cpp in Sources */,
 				6C89D4C7290656DA00FC1038 /* box.cpp in Sources */,
+				6C89D4D5291830E500FC1038 /* save_tool.cpp in Sources */,
 				42B1EA2D281AB2DF00836A74 /* main.cpp in Sources */,
 				6CB1825329005BE8007FF0C5 /* player.cpp in Sources */,
 				6C89D4D2290F606800FC1038 /* sound.cpp in Sources */,
@@ -207,6 +205,7 @@
 				6CB1825229005BE8007FF0C5 /* texture.cpp in Sources */,
 				42B1EA30281AB2DF00836A74 /* init_sdl.cpp in Sources */,
 				6CB1824F29005BE8007FF0C5 /* sprite.cpp in Sources */,
+				6C89D4DA2919AC1400FC1038 /* jsoncpp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
