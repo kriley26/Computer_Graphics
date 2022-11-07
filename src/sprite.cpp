@@ -11,6 +11,8 @@
 
 namespace cge {
 
+    Sprite::Sprite() {}
+
 	Sprite::Sprite(int x1, int y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1) {
 		si = si1;
 		sti = sti1;

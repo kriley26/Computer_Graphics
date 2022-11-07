@@ -41,6 +41,7 @@ namespace cge {
         Sound* sound;
 
 	public:
+        Sprite();
 		Sprite(int x1, int y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1);
 		Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1);
 		Sprite(int x1, int y1, SDLInfo si1, cge::Texture t1, int width1, int height1, int scrW, int scrH, Sound* s);
