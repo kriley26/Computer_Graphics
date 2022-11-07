@@ -18,6 +18,7 @@ namespace cge {
 		x = x1;
 		y = y1;
 		dir = 1;
+        name = "";
 	}
 
 	Sprite::Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1) {
@@ -32,7 +33,7 @@ namespace cge {
 		name = "Mario";
 	}
 
-	Sprite::Sprite(int x1, int y1, SDLInfo si1, Texture t1, int width1, int height1, int scrW, int scrH) {
+	Sprite::Sprite(int x1, int y1, SDLInfo si1, Texture t1, int width1, int height1, int scrW, int scrH, Sound* s) {
 		si = si1;
         texture = t1;
 		sti = create_texture(si, texture.get_motion(1));
@@ -47,6 +48,7 @@ namespace cge {
         screenHeight = scrH;
 		name = "Mario";
         v = Vector(0, 0);
+        sound = s;
 	}
 
 	Sprite::~Sprite() {
@@ -83,31 +85,24 @@ namespace cge {
 
     void Sprite::detectCollision(Sprite s) {
         //Check if sprite is overlapping in x direction & reverse direction
+        
         // Left Hand Check
-        std::cout << box.getMaxY() << " " << s.box.getMinX() << endl;
         if (box.getMaxX() >= s.box.getMinX() && box.getMaxX() < s.box.getMaxX()) {
-            std::cout<< "Left" << std::endl;
             v.reverseDirection(Vector::X_DIR);
+            sound->playFile(sound->getHit(0).c_str());
         } // Right Hand Check
         else if (box.getMinX() <= s.box.getMaxX() && box.getMinX() > s.box.getMinX()) {
-            std::cout<< "right" << std::endl;
             v.reverseDirection(Vector::X_DIR);
+            sound->playFile(sound->getHit(0).c_str());
         } // Top Check
-        else if (box.getMaxY() >= s.box.getMinY() && box.getMaxY() < s.box.getMaxY()) {
-            std::cout<< "up" << std::endl;
+        else if (box.getMaxY() <= s.box.getMinY() && box.getMaxY() < s.box.getMaxY()) {
             v.reverseDirection(Vector::Y_DIR);
+            sound->playFile(sound->getHit(0).c_str());
         }
         else if (box.getMinY() >= s.box.getMaxY() && box.getMinY() > s.box.getMinY()) {
-            std::cout<< "down" << std::endl;
             v.reverseDirection(Vector::Y_DIR);
+            sound->playFile(sound->getHit(0).c_str());
         }
-//        if (box.getMinX() <= s.box.getMaxX() && box.getMaxX() >= s.box.getMinX()) {
-//            std::cout << "Detect Collision: X" << std::endl;
-//            v.reverseDirection(Vector::X_DIR);
-//        } else if (box.getMinY() <= s.box.getMaxY() && box.getMaxY() >= s.box.getMinY()) {
-//            std::cout << "Detect Collision: Y" << std::endl;
-//            v.reverseDirection(Vector::Y_DIR);
-//        }
     }
 
 	void Sprite::update_sprite() {
@@ -119,10 +114,12 @@ namespace cge {
 		if (x + sto.width >= screenWidth || x <= 0) {
 			v.setX(-v.getX());
 			is_spinning = true;
+            sound->playFile(sound->getHit(1).c_str());
 		}
 		if (y + sto.height >= screenHeight || y <= 0) {
 			v.setY(-v.getY());
 			is_spinning = true;
+            sound->playFile(sound->getHit(1).c_str());
 		}
 
 		if (is_spinning) {
@@ -148,4 +145,32 @@ namespace cge {
 			render_texture(si, sti, x, y, angle, SDL_FLIP_NONE, sto);
 		}
 	}
+
+    std::string Sprite::get_name() {
+        return name;
+    }
+
+    int Sprite::get_x_pos() {
+        return x;
+    }
+    
+    int Sprite::get_y_pos() {
+        return y;
+    }
+
+    int Sprite::get_angle() {
+        return angle;
+    }
+
+    bool Sprite::get_spinning() {
+        return is_spinning;
+    }
+
+    int Sprite::get_screenwidth() {
+        return screenWidth;
+    }
+
+    int Sprite::get_screenheight() {
+        return screenHeight;
+    }
 }

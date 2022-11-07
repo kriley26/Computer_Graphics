@@ -16,6 +16,7 @@ Author: Keegan Riley
 #include "src/texture.hpp"
 #include "src/movement.hpp"
 #include "src/box.hpp"
+#include "src/sound.hpp"
 
 namespace cge {
 	class Sprite
@@ -37,11 +38,12 @@ namespace cge {
 		Vector v;
 		Texture texture;
         Box box;
+        Sound* sound;
 
 	public:
 		Sprite(int x1, int y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1);
 		Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1);
-		Sprite(int x1, int y1, SDLInfo si1, cge::Texture t1, int width1, int height1, int scrW, int scrH);
+		Sprite(int x1, int y1, SDLInfo si1, cge::Texture t1, int width1, int height1, int scrW, int scrH, Sound* s);
 		~Sprite();
 		void sleep(int milliseconds);
 		void updateVector();
@@ -50,6 +52,13 @@ namespace cge {
         void detectCollision(Sprite s);
 		void update_sprite();
 		void draw_sprite();
+        std::string get_name();
+        int get_x_pos();
+        int get_y_pos();
+        int get_angle();
+        bool get_spinning();
+        int get_screenwidth();
+        int get_screenheight();
 	};
 }
 
