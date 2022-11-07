@@ -52,6 +52,13 @@ namespace cge {
         void detectCollision(Sprite s);
 		void update_sprite();
 		void draw_sprite();
+        std::string get_name();
+        int get_x_pos();
+        int get_y_pos();
+        int get_angle();
+        bool get_spinning();
+        int get_screenwidth();
+        int get_screenheight();
 	};
 }
 

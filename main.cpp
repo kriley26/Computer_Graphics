@@ -56,7 +56,7 @@ bool get_time(std::chrono::system_clock::time_point time, double limit) {
 int main(int argc, char *argv[])
 {	
 	cge::init_sdl();
-    
+
     cge::create_json();
 
 	cge::SDLInfo sdl_info;
@@ -111,6 +111,10 @@ int main(int argc, char *argv[])
 	double changeVectorSpeed = 5;
 	int updateCount = 0;
 	int drawCount = 0;
+    std::string jsonFile = "";
+    if (FILE *file = fopen((resource_path + "save_data/save.json").c_str(), "r")) {
+
+    }
 	cge::Sprite s1(100, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
 	cge::Sprite s2(300, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
 	cge::Sprite s3(500, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
@@ -185,6 +189,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
+    cge::create_json(sprites);
 	std::cout << "\nUpdate Count: " << updateCount << "\nDrawCount: " << drawCount;
 	std::time_t end_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	std::cout << "\nEnd time: " << end_time << "\n";

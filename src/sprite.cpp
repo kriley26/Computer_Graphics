@@ -18,6 +18,7 @@ namespace cge {
 		x = x1;
 		y = y1;
 		dir = 1;
+        name = "";
 	}
 
 	Sprite::Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1) {
@@ -144,4 +145,32 @@ namespace cge {
 			render_texture(si, sti, x, y, angle, SDL_FLIP_NONE, sto);
 		}
 	}
+
+    std::string Sprite::get_name() {
+        return name;
+    }
+
+    int Sprite::get_x_pos() {
+        return x;
+    }
+    
+    int Sprite::get_y_pos() {
+        return y;
+    }
+
+    int Sprite::get_angle() {
+        return angle;
+    }
+
+    bool Sprite::get_spinning() {
+        return is_spinning;
+    }
+
+    int Sprite::get_screenwidth() {
+        return screenWidth;
+    }
+
+    int Sprite::get_screenheight() {
+        return screenHeight;
+    }
 }
