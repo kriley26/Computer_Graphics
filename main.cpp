@@ -23,6 +23,7 @@ For more information, please refer to <https://unlicense.org>
 #include "src/player.hpp"
 #include "src/texture.hpp"
 #include "src/sound.hpp"
+#include "src/save_tool.hpp"
 
 std::chrono::system_clock::time_point since_update;
 std::chrono::system_clock::time_point since_draw;
@@ -55,6 +56,8 @@ bool get_time(std::chrono::system_clock::time_point time, double limit) {
 int main(int argc, char *argv[])
 {	
 	cge::init_sdl();
+    
+    cge::create_json();
 
 	cge::SDLInfo sdl_info;
 
