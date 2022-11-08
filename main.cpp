@@ -8,6 +8,7 @@ For more information, please refer to <https://unlicense.org>
 #include <chrono>
 #include <iostream>
 #include <thread>
+#include <fstream>
 #include <vector>
 
 #include <SDL2/SDL.h>
@@ -23,6 +24,7 @@ For more information, please refer to <https://unlicense.org>
 #include "src/player.hpp"
 #include "src/texture.hpp"
 #include "src/sound.hpp"
+#include "src/save_game.hpp"
 
 std::chrono::system_clock::time_point since_update;
 std::chrono::system_clock::time_point since_draw;
@@ -82,10 +84,10 @@ int main(int argc, char *argv[])
     auto character_hit_path = resource_path + std::string("audio/mk64_bowser02.wav");
     
     cge::Sound sound;
-    sound.loadFiles(0, background_one_path);
-    sound.loadFiles(1, backgroung_two_path);
-    sound.loadFiles(2, wall_hit_path);
-    sound.loadFiles(3, character_hit_path);
+    sound.loadFiles(0, &background_one_path);
+    sound.loadFiles(1, &backgroung_two_path);
+    sound.loadFiles(2, &wall_hit_path);
+    sound.loadFiles(3, &character_hit_path);
 
 	std::vector<std::string*> mario_movement;
 	mario_movement.push_back(&mario_texture_path_1);
@@ -108,18 +110,53 @@ int main(int argc, char *argv[])
 	double changeVectorSpeed = 5;
 	int updateCount = 0;
 	int drawCount = 0;
-	cge::Sprite s1(100, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
-	cge::Sprite s2(300, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
-	cge::Sprite s3(500, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
-    
-	cge::Player player(std::string(TOSTRING("Player 1")), &s3);
+    cge::Sprite* s1 = NULL;
+    cge::Sprite* s2 = NULL;
+    cge::Sprite* s3 = NULL;
+    if (FILE *file = fopen((resource_path + "save_data/save.json").c_str(), "r")) {
+        std::cout << "File present" << endl;
+        std::string text;
+        ifstream myFile(resource_path + "save_data/save.json");
+        
+        while (getline(myFile, text)) {
+            if (s1 == NULL) {
+                s1 = cge::parse_data(text);
+                s1->set_SDLInfo(sdl_info);
+                s1->set_Texture(mario_text);
+                s1->set_screenWidth(SCREEN_WIDTH);
+                s1->set_screenHeight(SCREEN_HEIGHT);
+                s1->set_Sound(&sound);
+            } else if (s2 == NULL) {
+                s2 = cge::parse_data(text);
+                s2->set_SDLInfo(sdl_info);
+                s2->set_Texture(mario_text);
+                s2->set_screenWidth(SCREEN_WIDTH);
+                s2->set_screenHeight(SCREEN_HEIGHT);
+                s2->set_Sound(&sound);
+            } else {
+                s3 = cge::parse_data(text);
+                s3->set_SDLInfo(sdl_info);
+                s3->set_Texture(mario_text);
+                s3->set_screenWidth(SCREEN_WIDTH);
+                s3->set_screenHeight(SCREEN_HEIGHT);
+                s3->set_Sound(&sound);
+            }
+            
+        }
+        
+    } else {
+        s1 = new cge::Sprite(100, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
+        s2 = new cge::Sprite(300, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
+        s3 = new cge::Sprite(500, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
+    }
+	cge::Player player(std::string(TOSTRING("Player 1")), s3);
 	std::time_t start_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	std::cout << "\nStart time: " << start_time << "\n";
 
 	std::vector<cge::Sprite*>  sprites;
-	sprites.push_back(&s1);
-	sprites.push_back(&s2);
-	sprites.push_back(&s3);
+	sprites.push_back(s1);
+	sprites.push_back(s2);
+	sprites.push_back(s3);
     
     sound.playFile(sound.getBackground(0).c_str());
     
@@ -155,20 +192,20 @@ int main(int argc, char *argv[])
 		}
 
 		if (get_time(since_update, updateSpeed)) {
-            s1.detectCollision(s3);
-            s2.detectCollision(s3);
+            s1->detectCollision(s3);
+            s2->detectCollision(s3);
             
-			s1.update_sprite();
-			s2.update_sprite();
+			s1->update_sprite();
+			s2->update_sprite();
 			updateCount++;
 			since_update = std::chrono::system_clock::now();
 		}
 
 		if (get_time(since_draw, drawSpeed)) {
 			SDL_RenderClear(sdl_info.renderer);
-			s1.draw_sprite();
-			s2.draw_sprite();
-			s3.draw_sprite();
+			s1->draw_sprite();
+			s2->draw_sprite();
+			s3->draw_sprite();
 			drawCount++;
 			since_draw = std::chrono::system_clock::now();
 			SDL_RenderPresent(sdl_info.renderer);
@@ -181,7 +218,8 @@ int main(int argc, char *argv[])
 			since_change_vec = std::chrono::system_clock::now();
 		}
 	}
-
+    
+    cge::save_game(sprites);
 	std::cout << "\nUpdate Count: " << updateCount << "\nDrawCount: " << drawCount;
 	std::time_t end_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	std::cout << "\nEnd time: " << end_time << "\n";

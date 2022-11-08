@@ -1,5 +1,6 @@
 #include <chrono>
 #include <iostream>
+#include <sstream>
 #include <thread>
 
 #include "src/sprite.hpp"
@@ -52,6 +53,17 @@ namespace cge {
         sound = s;
 	}
 
+    Sprite::Sprite(std::string arr[]) {
+        name = arr[0];
+        x = stoi(arr[1]);
+        y = stoi(arr[2]);
+        angle = stoi(arr[3]);
+        istringstream(arr[4]) >> std::boolalpha >> is_spinning;
+        screenWidth = stof(arr[5]);
+        screenHeight = stof(arr[6]);
+        box = Box(stof(arr[7]), stof(arr[8]), stof(arr[9]), stof(arr[1]));
+    }
+
 	Sprite::~Sprite() {
 		destroy_texture(sti);
 	}
@@ -84,23 +96,27 @@ namespace cge {
 		}
 	}
 
-    void Sprite::detectCollision(Sprite s) {
+    Box* Sprite::getOutline() {
+        return &box;
+    }
+
+    void Sprite::detectCollision(Sprite* s) {
         //Check if sprite is overlapping in x direction & reverse direction
         
         // Left Hand Check
-        if (box.getMaxX() >= s.box.getMinX() && box.getMaxX() < s.box.getMaxX()) {
+        if (box.getMaxX() >= s->box.getMinX() && box.getMaxX() < s->box.getMaxX()) {
             v.reverseDirection(Vector::X_DIR);
             sound->playFile(sound->getHit(0).c_str());
         } // Right Hand Check
-        else if (box.getMinX() <= s.box.getMaxX() && box.getMinX() > s.box.getMinX()) {
+        else if (box.getMinX() <= s->box.getMaxX() && box.getMinX() > s->box.getMinX()) {
             v.reverseDirection(Vector::X_DIR);
             sound->playFile(sound->getHit(0).c_str());
         } // Top Check
-        else if (box.getMaxY() <= s.box.getMinY() && box.getMaxY() < s.box.getMaxY()) {
+        else if (box.getMaxY() <= s->box.getMinY() && box.getMaxY() < s->box.getMaxY()) {
             v.reverseDirection(Vector::Y_DIR);
             sound->playFile(sound->getHit(0).c_str());
         }
-        else if (box.getMinY() >= s.box.getMaxY() && box.getMinY() > s.box.getMinY()) {
+        else if (box.getMinY() >= s->box.getMaxY() && box.getMinY() > s->box.getMinY()) {
             v.reverseDirection(Vector::Y_DIR);
             sound->playFile(sound->getHit(0).c_str());
         }
@@ -146,4 +162,52 @@ namespace cge {
 			render_texture(si, sti, x, y, angle, SDL_FLIP_NONE, sto);
 		}
 	}
+
+    std::string Sprite::get_name() {
+        return name;
+    }
+
+    int Sprite::get_x_pos() {
+        return x;
+    }
+
+    int Sprite::get_y_pos() {
+        return y;
+    }
+
+    int Sprite::get_angle() {
+        return angle;
+    }
+
+    bool Sprite::get_spinning() {
+        return is_spinning;
+    }
+
+    int Sprite::get_screenwidth() {
+        return screenWidth;
+    }
+
+    int Sprite::get_screenheight() {
+        return screenHeight;
+    }
+
+    void Sprite::set_SDLInfo(SDLInfo si1) {
+        si = si1;
+    }
+
+    void Sprite::set_Texture(cge::Texture t) {
+        texture = t;
+    }
+
+    void Sprite::set_screenWidth(int screenW) {
+        screenWidth = screenW;
+    }
+
+    void Sprite::set_screenHeight(int screenH) {
+        screenHeight = screenH;
+    }
+
+    void Sprite::set_Sound(Sound *s) {
+        sound = s;
+    }
 }
