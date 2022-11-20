@@ -53,6 +53,9 @@
 		6C34625E28EBA5D400D3D307 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
 		6C89D4C5290656DA00FC1038 /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box.cpp; sourceTree = "<group>"; };
 		6C89D4C6290656DA00FC1038 /* box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = box.hpp; sourceTree = "<group>"; };
+		6C89D4CE290F600A00FC1038 /* libSDL2_mixer-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libSDL2_mixer-2.0.0.dylib"; sourceTree = "<group>"; };
+		6C89D4D0290F606800FC1038 /* sound.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sound.hpp; sourceTree = "<group>"; };
+		6C89D4D1290F606800FC1038 /* sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
 		6CB1824529005BE7007FF0C5 /* player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
 		6CB1824629005BE7007FF0C5 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		6CB1824729005BE7007FF0C5 /* texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 		42B1EA24281AB2DF00836A74 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6C89D4D1290F606800FC1038 /* sound.cpp */,
+				6C89D4D0290F606800FC1038 /* sound.hpp */,
 				6C89D4C5290656DA00FC1038 /* box.cpp */,
 				6C89D4C6290656DA00FC1038 /* box.hpp */,
 				6CB1824B29005BE8007FF0C5 /* movement.cpp */,
