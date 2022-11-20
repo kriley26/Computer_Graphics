@@ -27,7 +27,7 @@ Sound::~Sound() {
 }
 
 
-void Sound::loadFiles(int choice, std::string f) {
+void Sound::loadFiles(int choice, std::string *f) {
     switch (choice) {
         case 0:
             background_one = f;
@@ -56,9 +56,9 @@ void Sound::playFile(const char* filepath) {
 std::string Sound::getBackground(int choice) {
     switch (choice) {
         case 0:
-            return background_one;
+            return *background_one;
         case 1:
-            return background_two;
+            return *background_two;
         default:
             return "";
     }
@@ -67,9 +67,9 @@ std::string Sound::getBackground(int choice) {
 std::string Sound::getHit(int choice) {
     switch (choice) {
         case 0:
-            return wall_hit;
+            return *wall_hit;
         case 1:
-            return character_hit;
+            return *character_hit;
         default:
             return "";
     }

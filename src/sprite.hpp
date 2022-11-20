@@ -41,17 +41,20 @@ namespace cge {
         Sound* sound;
 
 	public:
+        Sprite();
 		Sprite(int x1, int y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1);
 		Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1);
 		Sprite(int x1, int y1, SDLInfo si1, cge::Texture t1, int width1, int height1, int scrW, int scrH, Sound* s);
+        Sprite(std::string arr[]);
 		~Sprite();
 		void sleep(int milliseconds);
 		void updateVector();
 		void passVector(Vector v1);
-        Box getOutline();
-        void detectCollision(Sprite s);
+        Box* getOutline();
+        void detectCollision(Sprite* s);
 		void update_sprite();
 		void draw_sprite();
+
         std::string get_name();
         int get_x_pos();
         int get_y_pos();
@@ -59,6 +62,12 @@ namespace cge {
         bool get_spinning();
         int get_screenwidth();
         int get_screenheight();
+
+        void set_SDLInfo(SDLInfo si1);
+        void set_Texture(cge::Texture t);
+        void set_screenHeight(int screenH);
+        void set_screenWidth(int screenW);
+        void set_Sound(Sound* s);
 	};
 }
 

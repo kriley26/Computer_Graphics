@@ -19,15 +19,15 @@ void init_sdl_mixer();
 
 class Sound {
 private:
-    std::string background_one;
-    std::string background_two;
-    std::string wall_hit;
-    std::string character_hit;
+    std::string* background_one;
+    std::string* background_two;
+    std::string* wall_hit;
+    std::string* character_hit;
     
 public:
     Sound();
     ~Sound();
-    void loadFiles(int choice, std::string f);
+    void loadFiles(int choice, std::string *f);
     void playFile(const char* filepath);
     std::string getBackground(int choice);
     std::string getHit(int choice);
