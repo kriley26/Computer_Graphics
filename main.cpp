@@ -60,8 +60,6 @@ int main(int argc, char *argv[])
 {	
 	cge::init_sdl();
 
-    cge::create_json();
-
 	cge::SDLInfo sdl_info;
 
 	constexpr int SCREEN_WIDTH = 1200;
