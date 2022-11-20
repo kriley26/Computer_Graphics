@@ -26,17 +26,19 @@ For more information, please refer to <https://unlicense.org>
 #include "src/sound.hpp"
 #include "src/save_game.hpp"
 
-std::chrono::system_clock::time_point since_update;
-std::chrono::system_clock::time_point since_draw;
-std::chrono::system_clock::time_point since_change_vec;
+using namespace std;
+
+chrono::system_clock::time_point since_update;
+chrono::system_clock::time_point since_draw;
+chrono::system_clock::time_point since_change_vec;
 
 void sleep(int milliseconds)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+	this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
 }
 
 void init_time() {
-	since_update = std::chrono::system_clock::now();
+	since_update = chrono::system_clock::now();
 	since_draw = std::chrono::system_clock::now();
 	since_change_vec = std::chrono::system_clock::now();
 }

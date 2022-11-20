@@ -9,7 +9,6 @@
 #include "src/vector.hpp"
 #include "src/movement.hpp"
 
-
 namespace cge {
 
     Sprite::Sprite() {}
