@@ -21,6 +21,7 @@ namespace cge {
 		x = x1;
 		y = y1;
 		dir = 1;
+        name = "";
 	}
 
 	Sprite::Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1) {

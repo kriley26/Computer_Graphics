@@ -54,7 +54,7 @@ namespace cge {
         void detectCollision(Sprite* s);
 		void update_sprite();
 		void draw_sprite();
-        
+
         std::string get_name();
         int get_x_pos();
         int get_y_pos();
@@ -62,7 +62,7 @@ namespace cge {
         bool get_spinning();
         int get_screenwidth();
         int get_screenheight();
-        
+
         void set_SDLInfo(SDLInfo si1);
         void set_Texture(cge::Texture t);
         void set_screenHeight(int screenH);

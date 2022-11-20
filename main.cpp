@@ -58,6 +58,8 @@ int main(int argc, char *argv[])
 {	
 	cge::init_sdl();
 
+    cge::create_json();
+
 	cge::SDLInfo sdl_info;
 
 	constexpr int SCREEN_WIDTH = 1200;
@@ -110,14 +112,18 @@ int main(int argc, char *argv[])
 	double changeVectorSpeed = 5;
 	int updateCount = 0;
 	int drawCount = 0;
-    cge::Sprite* s1 = NULL;
+    std::string jsonFile = "";
+    if (FILE *file = fopen((resource_path + "save_data/save.json").c_str(), "r")) {
+
+    }
+	cge::Sprite* s1 = NULL;
     cge::Sprite* s2 = NULL;
     cge::Sprite* s3 = NULL;
     if (FILE *file = fopen((resource_path + "save_data/save.json").c_str(), "r")) {
         std::cout << "File present" << endl;
         std::string text;
         ifstream myFile(resource_path + "save_data/save.json");
-        
+
         while (getline(myFile, text)) {
             if (s1 == NULL) {
                 s1 = cge::parse_data(text);
@@ -141,9 +147,9 @@ int main(int argc, char *argv[])
                 s3->set_screenHeight(SCREEN_HEIGHT);
                 s3->set_Sound(&sound);
             }
-            
+
         }
-        
+
     } else {
         s1 = new cge::Sprite(100, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
         s2 = new cge::Sprite(300, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
@@ -218,7 +224,7 @@ int main(int argc, char *argv[])
 			since_change_vec = std::chrono::system_clock::now();
 		}
 	}
-    
+
     cge::save_game(sprites);
 	std::cout << "\nUpdate Count: " << updateCount << "\nDrawCount: " << drawCount;
 	std::time_t end_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());

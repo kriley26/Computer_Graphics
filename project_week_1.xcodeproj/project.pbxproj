@@ -203,6 +203,7 @@
 			files = (
 				42B1EA2E281AB2DF00836A74 /* input.cpp in Sources */,
 				6C89D4C7290656DA00FC1038 /* box.cpp in Sources */,
+				6C89D4D5291830E500FC1038 /* save_tool.cpp in Sources */,
 				42B1EA2D281AB2DF00836A74 /* main.cpp in Sources */,
 				6CB1825329005BE8007FF0C5 /* player.cpp in Sources */,
 				6C89D4D2290F606800FC1038 /* sound.cpp in Sources */,
@@ -213,6 +214,7 @@
 				6CB1825229005BE8007FF0C5 /* texture.cpp in Sources */,
 				42B1EA30281AB2DF00836A74 /* init_sdl.cpp in Sources */,
 				6CB1824F29005BE8007FF0C5 /* sprite.cpp in Sources */,
+				6C89D4DA2919AC1400FC1038 /* jsoncpp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
