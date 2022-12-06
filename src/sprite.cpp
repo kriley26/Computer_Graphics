@@ -13,7 +13,7 @@ namespace cge {
 
     Sprite::Sprite() {}
 
-	Sprite::Sprite(int x1, int y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1) {
+	Sprite::Sprite(float x1, float y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1) {
 		si = si1;
 		sti = sti1;
 		sto = sto1;
@@ -23,7 +23,7 @@ namespace cge {
         name = "";
 	}
 
-	Sprite::Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1) {
+	Sprite::Sprite(float x1, float y1, SDLInfo si1, std::string image_path, int width1, int height1) {
 		si = si1;
 		sti = create_texture(si, image_path);
 		sto.width = width1;
@@ -35,7 +35,7 @@ namespace cge {
 		name = "Mario";
 	}
 
-	Sprite::Sprite(int x1, int y1, SDLInfo si1, Texture t1, int width1, int height1, int scrW, int scrH, Sound* s) {
+	Sprite::Sprite(float x1, float y1, SDLInfo si1, Texture t1, int width1, int height1, float scrW, float scrH, Sound* s) {
 		si = si1;
         texture = t1;
 		sti = create_texture(si, texture.get_motion(1));
@@ -55,8 +55,8 @@ namespace cge {
 
     Sprite::Sprite(std::string arr[]) {
         name = arr[0];
-        x = stoi(arr[1]);
-        y = stoi(arr[2]);
+        x = stof(arr[1]);
+        y = stof(arr[2]);
         angle = stoi(arr[3]);
         istringstream(arr[4]) >> std::boolalpha >> is_spinning;
         screenWidth = stof(arr[5]);
@@ -167,11 +167,11 @@ namespace cge {
         return name;
     }
 
-    int Sprite::get_x_pos() {
+    float Sprite::get_x_pos() {
         return x;
     }
 
-    int Sprite::get_y_pos() {
+    float Sprite::get_y_pos() {
         return y;
     }
 
@@ -183,11 +183,11 @@ namespace cge {
         return is_spinning;
     }
 
-    int Sprite::get_screenwidth() {
+    float Sprite::get_screenwidth() {
         return screenWidth;
     }
 
-    int Sprite::get_screenheight() {
+    float Sprite::get_screenheight() {
         return screenHeight;
     }
 
@@ -199,11 +199,11 @@ namespace cge {
         texture = t;
     }
 
-    void Sprite::set_screenWidth(int screenW) {
+    void Sprite::set_screenWidth(float screenW) {
         screenWidth = screenW;
     }
 
-    void Sprite::set_screenHeight(int screenH) {
+    void Sprite::set_screenHeight(float screenH) {
         screenHeight = screenH;
     }
 

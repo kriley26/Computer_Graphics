@@ -19,16 +19,20 @@ if(BUILD_MS_WINDOWS)
 	find_library(SDL_LIB NAMES SDL2 PATHS ${CMAKE_SOURCE_DIR}/lib/win/SDL2-2.0.20/lib/x64)
 	find_library(SDL_MAIN_LIB NAMES SDL2main PATHS ${CMAKE_SOURCE_DIR}/lib/win/SDL2-2.0.20/lib/x64)
 	find_library(SDL_IMAGE_LIB NAMES SDL2_image PATHS ${CMAKE_SOURCE_DIR}/lib/win/SDL2_image-2.0.5/lib/x64)
+	find_library(SDL_MIXER_LIB NAMES SDL2_mixer PATHS ${CMAKE_SOURCE_DIR}/lib/win/SDL2_mixer-2.0.4/lib/x64)
 	find_path(SDL_INCLUDES SDL.h ${CMAKE_SOURCE_DIR}/lib/win/SDL2-2.0.20/include)
 	find_path(SDL_IMAGE_INCLUDES SDL_image.h ${CMAKE_SOURCE_DIR}/lib/win/SDL2_image-2.0.5/include)
+	find_path(SDL_MIXER_INCLUDES SDL_mixer.h ${CMAKE_SOURCE_DIR}/lib/win/SDL2_mixer-2.0.4/include)
 elseif(BUILD_MACOS)
 	find_library(SDL_LIB NAMES SDL2)
 	find_library(SDL_IMAGE_LIB NAMES SDL2_image)
+	find_library(SDL_MIXER_LIB NAMES SDL2_mixer)
 	include_directories(/usr/local/include)
 elseif(BUILD_LINUX)
 	find_library(SDL_LIB NAMES libSDL2.so)
 	find_library(SDL_MAIN_LIB NAMES libSDL2main.a)
 	find_library(SDL_IMAGE_LIB NAMES libSDL2_image.so)
+	find_library(SDL_MIXER_LIB NAMES libSDL2_mixer.so)
 	find_path(SDL_INCLUDES SDL.h /usr/include/SDL2)
 	find_library(PTHREAD_LIBRARY NAMES pthread)
 endif()
@@ -49,7 +53,8 @@ if(BUILD_MS_WINDOWS)
 		${PROJECT_NAME} PRIVATE
 		${SDL_LIB}
 		${SDL_MAIN_LIB}
-		${SDL_IMAGE_LIB} 
+		${SDL_IMAGE_LIB}
+		${SDL_MIXER_LIB}
 		${CMAKE_DL_LIBS} 
 		${PTHREAD_LIBRARY})
 
@@ -70,6 +75,7 @@ else()
 		${PROJECT_NAME} PRIVATE
 		${SDL_LIB}
 		${SDL_IMAGE_LIB} 
+		${SDL_MIXER_LIB} 
 		${CMAKE_DL_LIBS} 
 		${PTHREAD_LIBRARY})
 endif()

@@ -1,4 +1,4 @@
-/*
+DDDDDDDDDD/*
 Developed for JHU 605.558: Computer Gaming Engines
 
 This is free and unencumbered software released into the public domain.
@@ -134,9 +134,6 @@ int main(int argc, char *argv[])
 	int updateCount = 0;
 	int drawCount = 0;
     std::string jsonFile = "";
-    if (FILE *file = fopen((resource_path + "save_data/save.json").c_str(), "r")) {
-
-    }
 	cge::Sprite* s1 = NULL;
     cge::Sprite* s2 = NULL;
     cge::Sprite* s3 = NULL;

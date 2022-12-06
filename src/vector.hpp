@@ -33,7 +33,7 @@ namespace cge {
 		void setX(float x1);
 		float getY();
 		void setY(float y1);
-		float getLength();
+		double getLength();
 		void normalize();
 		Vector addVector(Vector v);
 		void scale(int var);

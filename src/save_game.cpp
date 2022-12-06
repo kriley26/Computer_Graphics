@@ -34,9 +34,9 @@ string create_sprite_data(Sprite* s) {
 
 Sprite* parse_data(string sprite) {
     Sprite* s = new Sprite();
-    long length = sprite.length();
+    size_t length = sprite.length();
     string array[11];
-    char char_array[length+1];
+    char* char_array = new char[length+1];
     strcpy(char_array, sprite.c_str());
 
     char* token = strtok(char_array, ",");

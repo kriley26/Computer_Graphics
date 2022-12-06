@@ -31,8 +31,8 @@ namespace cge {
 		bool face_backwards = false;
 		bool is_spinning = false;
 		int angle = 0;
-        int screenWidth = 0;
-        int screenHeight = 0;
+        float screenWidth = 0;
+        float screenHeight = 0;
 
 		SDLInfo si;
 		SDLTextureInfo sti;
@@ -44,9 +44,9 @@ namespace cge {
 
 	public:
         Sprite();
-		Sprite(int x1, int y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1);
-		Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1);
-		Sprite(int x1, int y1, SDLInfo si1, cge::Texture t1, int width1, int height1, int scrW, int scrH, Sound* s);
+		Sprite(float x1, float y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1);
+		Sprite(float x1, float y1, SDLInfo si1, std::string image_path, int width1, int height1);
+		Sprite(float x1, float y1, SDLInfo si1, cge::Texture t1, int width1, int height1, float scrW, float scrH, Sound* s);
         Sprite(string arr[]);
 		~Sprite();
 		void sleep(int milliseconds);
@@ -58,17 +58,17 @@ namespace cge {
 		void draw_sprite();
 
         string get_name();
-        int get_x_pos();
-        int get_y_pos();
+        float get_x_pos();
+        float get_y_pos();
         int get_angle();
         bool get_spinning();
-        int get_screenwidth();
-        int get_screenheight();
+        float get_screenwidth();
+        float get_screenheight();
 
         void set_SDLInfo(SDLInfo si1);
         void set_Texture(cge::Texture t);
-        void set_screenHeight(int screenH);
-        void set_screenWidth(int screenW);
+        void set_screenHeight(float screenH);
+        void set_screenWidth(float screenW);
         void set_Sound(Sound* s);
 	};
 }

@@ -11,8 +11,8 @@ namespace cge {
 
 	Vector::Vector() {
 		srand((unsigned)time(NULL));
-		int xRand = rand() % 10 - 5;
-		int yRand = rand() % 10 - 5;
+		float xRand = float(rand() % 10 - 5);
+		float yRand = float(rand() % 10 - 5);
 		x = xRand;
 		y = yRand;
 	}
@@ -40,15 +40,15 @@ namespace cge {
 		y = y1;
 	}
 
-	float Vector::getLength() {
-		float xSqr = pow(x, 2);
-		float ySqr = pow(y, 2);
-		float mag = sqrt(xSqr + ySqr);
+	double Vector::getLength() {
+		double xSqr = pow(x, 2);
+		double ySqr = pow(y, 2);
+		double mag = sqrt(xSqr + ySqr);
 		return mag;
 	}
 
 	void Vector::normalize() {
-		float mag = getLength();
+		double mag = getLength();
 
 		x = (x / mag);
 		y = (y / mag);
