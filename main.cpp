@@ -1,4 +1,4 @@
-DDDDDDDDDD/*
+/*
 Developed for JHU 605.558: Computer Gaming Engines
 
 This is free and unencumbered software released into the public domain.
