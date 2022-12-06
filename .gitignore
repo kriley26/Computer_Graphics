@@ -6,11 +6,10 @@
 .DS_Store*
 /SDL2-2.24.0/
 /*.zip/
-/project_week_1.vs/*
-!project_week_1.vs/project_week_1.sln/
+project_week_1.vs/project_week_1.vcxproj*
 /project_week_1.vs/.vs/
 /project_week_1.vs/x64/
-/project_week_1.xcodeproj*
+/project_week_1.xcodeproj/
 /project_week_1.xcodeproj/project.xcworkspace/
 /project_week_1.xcodeproj/xcuserdata/
 /.DS_Store
