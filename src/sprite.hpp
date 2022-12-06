@@ -18,14 +18,16 @@ Author: Keegan Riley
 #include "src/box.hpp"
 #include "src/sound.hpp"
 
+using namespace std;
+
 namespace cge {
 	class Sprite
 	{
 	private:
 		float x, y;
 		int dir;
-		std::string path;
-		std::string name;
+		string path;
+		string name;
 		bool face_backwards = false;
 		bool is_spinning = false;
 		int angle = 0;
@@ -45,7 +47,7 @@ namespace cge {
 		Sprite(int x1, int y1, SDLInfo si1, SDLTextureInfo sti1, SDLTextureOptions sto1);
 		Sprite(int x1, int y1, SDLInfo si1, std::string image_path, int width1, int height1);
 		Sprite(int x1, int y1, SDLInfo si1, cge::Texture t1, int width1, int height1, int scrW, int scrH, Sound* s);
-        Sprite(std::string arr[]);
+        Sprite(string arr[]);
 		~Sprite();
 		void sleep(int milliseconds);
 		void updateVector();
@@ -55,7 +57,7 @@ namespace cge {
 		void update_sprite();
 		void draw_sprite();
 
-        std::string get_name();
+        string get_name();
         int get_x_pos();
         int get_y_pos();
         int get_angle();

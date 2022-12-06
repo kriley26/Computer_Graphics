@@ -25,6 +25,7 @@ For more information, please refer to <https://unlicense.org>
 #include "src/texture.hpp"
 #include "src/sound.hpp"
 #include "src/save_game.hpp"
+#include "src/map.hpp"
 
 using namespace std;
 
@@ -57,7 +58,25 @@ bool get_time(std::chrono::system_clock::time_point time, double limit) {
 }
 
 int main(int argc, char *argv[])
-{	
+{
+    cge::Map *m;
+    cge::Map map = cge::generateMap();
+    cge::Map map2 = cge::generateMap();
+    
+    cout << "M equals Map 1" << endl;
+    m = &map;
+    cout << "Addr M: " << &m << endl;
+    cout << "M: " << m << endl;
+    cout << "Map: " << &map << endl;
+    cout << "Map2: " << &map2 << endl;
+    
+    cout << "M equals Map 2" << endl;
+    m = &map2;
+    cout << "Addr M: " << &m << endl;
+    cout << "M: " << m << endl;
+    cout << "Map: " << &map << endl;
+    cout << "Map2: " << &map2 << endl;
+    
 	cge::init_sdl();
     
     //cge::create_json();

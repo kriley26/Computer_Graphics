@@ -18,13 +18,24 @@ Author: Keegan Riley
 #include "src/sprite.hpp"
 #include "src/box.hpp"
 
+using namespace std;
+
 namespace cge {
 
-std::string create_box_data(Box* box);
-std::string create_sprite_data(Sprite* sprite);
-Sprite* parse_data(std::string sprite);
-void save_game(std::vector<Sprite*> sprites);
-std::vector<Sprite*> load_game(std::string file);
+// Binary Save Data
+string create_box_data(Box* box);
+string create_sprite_data(Sprite* sprite);
+Sprite* parse_data(string sprite);
+void save_game(vector<Sprite*> sprites);
+vector<Sprite*> load_game(string file);
+
+// Json Save Data
+string create_box_json(Box* box);
+string create_sprite_json(Sprite* sprite);
+Sprite* parse_json(string sprite);
+void save_json(vector<Sprite*> sprites);
+vector<Sprite*> load_json(string file);
+
 
 }
 
