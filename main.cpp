@@ -12,7 +12,7 @@ For more information, please refer to <https://unlicense.org>
 #include <vector>
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
+#include <SDL_mixer.h>
 
 #include "src/image.hpp"
 #include "src/info.hpp"
@@ -59,6 +59,8 @@ bool get_time(std::chrono::system_clock::time_point time, double limit) {
 int main(int argc, char *argv[])
 {	
 	cge::init_sdl();
+    
+    //cge::create_json();
 
 	cge::SDLInfo sdl_info;
 

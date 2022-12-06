@@ -9,6 +9,7 @@ Author: Keegan Riley
 
 #include <chrono>
 #include <thread>
+#include <string>
 #include <vector>
 
 #include "src/info.hpp"

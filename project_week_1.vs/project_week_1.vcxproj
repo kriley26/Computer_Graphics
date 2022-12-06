@@ -144,13 +144,13 @@ Copy / Y $(ProjectDir)..\lib\win\SDL2_image-2.0.5\lib\x86\SDL2_image.dll "$(Targ
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
-      <AdditionalIncludeDirectories>%(ProjectDir)..\;%(ProjectDir)..\lib\win\SDL2-2.0.20\include;%(ProjectDir)..\lib\win\SDL2-2.0.20\include\SDL2;%(ProjectDir)..\lib\win\SDL2_image-2.0.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(ProjectDir)..\;%(ProjectDir)..\lib\win\SDL2-2.0.20\include;%(ProjectDir)..\lib\win\SDL2-2.0.20\include\SDL2;%(ProjectDir)..\lib\win\SDL2_image-2.0.5\include;%(ProjectDir)..\lib\win\SDL2_mixer-2.0.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%(ProjectDir)..\lib\win\SDL2-2.0.20\lib\x64;%(ProjectDir)..\lib\win\SDL2_image-2.0.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(ProjectDir)..\lib\win\SDL2-2.0.20\lib\x64;%(ProjectDir)..\lib\win\SDL2_image-2.0.5\lib\x64;C:\Users\KeeganRiley\Desktop\git\Computer_Graphics\lib\win\SDL2_mixer-2.0.4\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>Copy / Y $(ProjectDir)..\lib\win\SDL2-2.0.20\lib\x64\SDL2.dll "$(TargetDir)"
@@ -202,16 +202,30 @@ Copy / Y $(ProjectDir)..\lib\win\SDL2_image-2.0.5\lib\x64\zlib1.dll "$(TargetDir
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\src\box.cpp" />
     <ClCompile Include="..\src\image.cpp" />
     <ClCompile Include="..\src\init_sdl.cpp" />
     <ClCompile Include="..\src\input.cpp" />
+    <ClCompile Include="..\src\movement.cpp" />
+    <ClCompile Include="..\src\player.cpp" />
+    <ClCompile Include="..\src\sound.cpp" />
+    <ClCompile Include="..\src\sprite.cpp" />
+    <ClCompile Include="..\src\texture.cpp" />
+    <ClCompile Include="..\src\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\box.hpp" />
     <ClInclude Include="..\src\image.hpp" />
     <ClInclude Include="..\src\info.hpp" />
     <ClInclude Include="..\src\init_sdl.hpp" />
     <ClInclude Include="..\src\input.hpp" />
+    <ClInclude Include="..\src\movement.hpp" />
+    <ClInclude Include="..\src\player.hpp" />
     <ClInclude Include="..\src\preprocessor.h" />
+    <ClInclude Include="..\src\sound.hpp" />
+    <ClInclude Include="..\src\sprite.hpp" />
+    <ClInclude Include="..\src\texture.hpp" />
+    <ClInclude Include="..\src\vector.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
