@@ -3,7 +3,6 @@
 /build/
 /visual_studio/
 .idea*
-!/.gitignore
 /SDL2-2.24.0/
 /*.zip/
 /project_week_1.vs/.vs/
