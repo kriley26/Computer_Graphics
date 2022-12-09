@@ -41,22 +41,43 @@ SDLEventInfo get_current_events()
 						break;
 					case SDLK_w:
 					case SDLK_UP:
-						event_info.events[num_events++] = EventType::UP;
+						event_info.events[num_events++] = EventType::UP_DOWN;
 						break;
 					case SDLK_a:
 					case SDLK_LEFT:
-						event_info.events[num_events++] = EventType::LEFT;
+						event_info.events[num_events++] = EventType::LEFT_DOWN;
 						break;
 					case SDLK_s:
 					case SDLK_DOWN:
-						event_info.events[num_events++] = EventType::DOWN;
+						event_info.events[num_events++] = EventType::DOWN_DOWN;
 						break;
 					case SDLK_d:
 					case SDLK_RIGHT:
-						event_info.events[num_events++] = EventType::RIGHT;
+						event_info.events[num_events++] = EventType::RIGHT_DOWN;
 						break;
 					default:
 						break;
+				}
+				break;
+			case SDL_KEYUP:
+				switch (e.key.keysym.sym) {
+				case SDLK_w:
+				case SDLK_UP:
+					event_info.events[num_events++] = EventType::UP_UP;
+				case SDLK_a:
+				case SDLK_LEFT:
+					event_info.events[num_events++] = EventType::LEFT_UP;
+					break;
+				case SDLK_s:
+				case SDLK_DOWN:
+					event_info.events[num_events++] = EventType::DOWN_UP;
+					break;
+				case SDLK_d:
+				case SDLK_RIGHT:
+					event_info.events[num_events++] = EventType::RIGHT_UP;
+					break;
+				default:
+					break;
 				}
 				break;
 			default:

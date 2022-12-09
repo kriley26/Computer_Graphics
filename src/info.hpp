@@ -25,10 +25,26 @@ enum class EventType
 	PLAY_SOUND,
 	TOGGLE_MUSIC,
 	QUIT,
-	UP, 
-	DOWN,
+	UP_UP, 
+	UP_DOWN,
+	DOWN_UP,
+	DOWN_DOWN,
+	RIGHT_UP,
+	RIGHT_DOWN,
+	LEFT_UP,
+	LEFT_DOWN
+};
+
+enum class DIRECTION_FACING {
 	RIGHT,
-	LEFT
+	LEFT,
+	DOWN,
+	UP
+};
+
+enum class ACTIVITY {
+	IDLE,
+	WALK
 };
 
 struct SDLEventInfo
@@ -43,7 +59,8 @@ struct SDLTextureInfo
 	SDL_Texture * texture;
 	int width;
 	int height;
-	SDL_Rect dimensions;
+	SDL_Rect m_src;
+	SDL_Rect m_dst;
 };
 
 struct SDLTextureOptions

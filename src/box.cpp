@@ -12,6 +12,8 @@ namespace cge {
         maxX = 0;
         minY = 0;
         maxY = 0;
+        width = 0;
+        height = 0;
     }
 
     Box::Box(float x1, float x2, float y1, float y2) {
@@ -19,6 +21,8 @@ namespace cge {
         maxX = x2;
         minY = y1;
         maxY = y2;
+        width = maxX - minX;
+        height = maxY - minY;
     }
 
     Box::~Box() {
@@ -39,6 +43,26 @@ namespace cge {
 
     float Box::getMaxY() {
         return maxY;
+    }
+
+    float Box::getWidth() {
+        return width;
+    }
+
+    float Box::getHeight() {
+        return height;
+    }
+
+    float Box::moveXPos(float position) {
+        maxX = position;
+        minX = position - width;
+        return minX;
+    }
+
+    float Box::moveYPos(float position) {
+        maxY = position;
+        minY = position - height;
+        return minY;
     }
 
     void Box::updateValues(float x1, float y1) {

@@ -126,6 +126,9 @@ void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo &texture_info,
 		rect.h = texture_info.height;
 	}
 
+	rect = texture_info.m_dst;
+	SDL_Rect = 
+
 	SDL_RenderCopyEx(sdl_info.renderer, texture_info.texture, NULL, &rect, angle, NULL, flip);
 }
 

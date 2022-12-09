@@ -23,8 +23,10 @@ namespace cge {
 
 	public:
         enum Direction {
-            X_DIR,
-            Y_DIR
+            LEFT_DIR,
+			RIGHT_DIR,
+            TOP_DIR,
+			BOTTOM_DIR
         };
 		Vector();
 		Vector(float x1, float y1);

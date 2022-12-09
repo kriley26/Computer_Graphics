@@ -19,6 +19,7 @@ namespace cge {
 	Player::Player(std::string n, Sprite *s) {
 		name = n;
 		sprite = s;
+		sprite->set_Name(name);
 	}
 
 	Player::~Player() {}
@@ -26,26 +27,31 @@ namespace cge {
 	void Player::moveUp() {
 		Vector v = Vector(0, -5);
 		sprite->passVector(v);
+		sprite->set_CurrentAction(Sprite::ACTIVITY::WALK);
 	}
 
 	void Player::moveDown() {
 		Vector v = Vector(0, 5);
 		sprite->passVector(v);
+		sprite->set_CurrentAction(Sprite::ACTIVITY::WALK);
 	}
 
 	void Player::moveLeft() {
 		Vector v = Vector(-5, 0);
 		sprite->passVector(v);
+		sprite->set_CurrentAction(Sprite::ACTIVITY::WALK);
 	}
 
 	void Player::moveRight() {
 		Vector v = Vector(5, 0);
 		sprite->passVector(v);
+		sprite->set_CurrentAction(Sprite::ACTIVITY::WALK);
 	}
 
     void Player::stopMovement() {
         Vector v = Vector(0, 0);
         sprite->passVector(v);
+		sprite->set_CurrentAction(Sprite::ACTIVITY::IDLE);
     }
 
 	Sprite* Player::getCharacter() {

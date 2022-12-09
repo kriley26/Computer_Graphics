@@ -75,12 +75,38 @@ namespace cge {
 
     void Vector::reverseDirection(Direction d) {
         switch (d) {
-            case X_DIR:
-                x = -x;
+            case LEFT_DIR:
+				if (x > 0) {
+					x = -x;
+				}
+				else if (x == 0) {
+					x = -1;
+				}
                 break;
-            case Y_DIR:
-                y = -y;
+            case RIGHT_DIR:
+				if (x < 0) {
+					x = -x;
+				}
+				else if (x == 0) {
+					x = 1;
+				}
                 break;
+			case TOP_DIR:
+				if (y > 0) {
+					y = -y;
+				}
+				else if (y == 0) {
+					y = -1;
+				}
+				break;
+			case BOTTOM_DIR:
+				if (y < 0) {
+					y = -y;
+				}
+				else if (y == 0) {
+					y = 1;
+				}
+				break;
             default:
                 break;
         }
