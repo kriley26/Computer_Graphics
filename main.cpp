@@ -12,7 +12,7 @@ For more information, please refer to <https://unlicense.org>
 #include <vector>
 
 #include <SDL2/SDL.h>
-#include <SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "src/image.hpp"
 #include "src/info.hpp"
@@ -26,6 +26,8 @@ For more information, please refer to <https://unlicense.org>
 #include "src/sound.hpp"
 #include "src/save_game.hpp"
 #include "src/map.hpp"
+#include "src/sprite_sheet.hpp"
+#include "src/menu.hpp"
 
 using namespace std;
 
@@ -59,6 +61,9 @@ bool get_time(std::chrono::system_clock::time_point time, double limit) {
 
 int main(int argc, char *argv[])
 {
+	const char* labels[3] = { "HELLO", "HI", "Bye" };
+	cge::Menu(labels);
+
     cge::Map *m;
     cge::Map map = cge::generateMap();
     cge::Map map2 = cge::generateMap();
@@ -99,12 +104,20 @@ int main(int argc, char *argv[])
 	auto mario_texture_path_1 = resource_path + std::string("images/mario.png");
 	auto mario_texture_path_2 = resource_path + std::string("images/mario_run.png");
 	auto mario_texture_jump = resource_path + std::string("images/mario_jump.png");
+	auto brad_texture_path = resource_path + string("images/thebrad.png");
+	auto chad_texture_path = resource_path + string("images/thechad.png");
+	auto man_texture_path = resource_path + string("images/theman.png");
     
     // Audio File Paths
     auto background_one_path = resource_path + std::string("audio/game_select.mp3");
     auto backgroung_two_path = resource_path + std::string("audio/sunny_side_up.mp3");
     auto wall_hit_path = resource_path + std::string("audio/mk64_boo_laugh.wav");
     auto character_hit_path = resource_path + std::string("audio/mk64_bowser02.wav");
+
+	// Sprite Sheets
+	cge::SpriteSheet* chad_sheet = cge::import_spritesheet(chad_texture_path);
+	cge::SpriteSheet* brad_sheet = cge::import_spritesheet(brad_texture_path);
+	cge::SpriteSheet* man_sheet = cge::import_spritesheet(man_texture_path);
     
     cge::Sound sound;
     sound.loadFiles(0, &background_one_path);
@@ -134,8 +147,8 @@ int main(int argc, char *argv[])
 	int updateCount = 0;
 	int drawCount = 0;
     std::string jsonFile = "";
-	cge::Sprite* s1 = NULL;
-    cge::Sprite* s2 = NULL;
+	cge::Sprite* s1 = new cge::Sprite();
+    cge::Sprite* s2 = new cge::Sprite();
     cge::Sprite* s3 = NULL;
     if (FILE *file = fopen((resource_path + "save_data/save.json").c_str(), "r")) {
         std::cout << "File present" << endl;
@@ -169,18 +182,24 @@ int main(int argc, char *argv[])
         }
 
     } else {
-        s1 = new cge::Sprite(100, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
-        s2 = new cge::Sprite(300, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
-        s3 = new cge::Sprite(500, 500, sdl_info, mario_text, 150, 200, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
+        s1 = new cge::Sprite(100, 500, sdl_info, mario_text, 75, 125, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
+        s2 = new cge::Sprite(300, 500, sdl_info, mario_text, 75, 125, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
+        s3 = new cge::Sprite(500, 500, sdl_info, man_sheet, 75, 125, SCREEN_WIDTH, SCREEN_HEIGHT, &sound);
     }
 	cge::Player player(std::string(TOSTRING("Player 1")), s3);
 	std::time_t start_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	std::cout << "\nStart time: " << start_time << "\n";
 
-	std::vector<cge::Sprite*>  sprites;
-	sprites.push_back(s1);
-	sprites.push_back(s2);
-	sprites.push_back(s3);
+	s1->set_Name("Left Mario");
+	s2->set_Name("Right Mario");
+
+	std::vector<cge::Sprite*> npcSprites;
+	std::vector<cge::Sprite*> allSprites;
+	//npcSprites.push_back(s1)/*;
+	//npcSprites.push_back(s2);   
+	//allSprites.push_back(s1);
+	//allSprites.push_back(s2);*/
+	allSprites.push_back(s3);
     
     sound.playFile(sound.getBackground(0).c_str());
     
@@ -194,21 +213,27 @@ int main(int argc, char *argv[])
 				case cge::EventType::QUIT: // 'esc' or close window
 					run_game = false;
 					break;
-				case cge::EventType::UP:
+				case cge::EventType::UP_DOWN:
 					player.moveUp();
 					player.getCharacter()->update_sprite();
 					break;
-				case cge::EventType::DOWN:
+				case cge::EventType::DOWN_DOWN:
 					player.moveDown();
 					player.getCharacter()->update_sprite();
 					break;
-				case cge::EventType::LEFT:
+				case cge::EventType::LEFT_DOWN:
 					player.moveLeft();
 					player.getCharacter()->update_sprite();
 					break;
-				case cge::EventType::RIGHT:
+				case cge::EventType::RIGHT_DOWN:
 					player.moveRight();
 					player.getCharacter()->update_sprite();
+					break;
+				case cge::EventType::DOWN_UP:
+				case cge::EventType::UP_UP:
+				case cge::EventType::LEFT_UP:
+				case cge::EventType::RIGHT_UP:
+					player.stopMovement();
 					break;
 				default:
 					break;
@@ -216,34 +241,34 @@ int main(int argc, char *argv[])
 		}
 
 		if (get_time(since_update, updateSpeed)) {
-            s1->detectCollision(s3);
-            s2->detectCollision(s3);
-            
-			s1->update_sprite();
-			s2->update_sprite();
+			for (cge::Sprite* s : npcSprites) {
+				s->detectCollision(player.getCharacter());
+				s->update_sprite();
+			}
 			updateCount++;
 			since_update = std::chrono::system_clock::now();
 		}
 
 		if (get_time(since_draw, drawSpeed)) {
 			SDL_RenderClear(sdl_info.renderer);
-			s1->draw_sprite();
-			s2->draw_sprite();
-			s3->draw_sprite();
+			for (cge::Sprite* s : allSprites) {
+				s->draw_sprite();
+			}
 			drawCount++;
 			since_draw = std::chrono::system_clock::now();
 			SDL_RenderPresent(sdl_info.renderer);
+
 		}
 
 		if (get_time(since_change_vec, changeVectorSpeed)) {
-			for (int i = 0; i < 3; i++) {
-				sprites[i]->updateVector();
+			for (cge::Sprite* sprite : npcSprites) {
+				sprite->updateVector();
 			}
 			since_change_vec = std::chrono::system_clock::now();
 		}
 	}
 
-    cge::save_game(sprites);
+    cge::save_game(allSprites);
 	std::cout << "\nUpdate Count: " << updateCount << "\nDrawCount: " << drawCount;
 	std::time_t end_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	std::cout << "\nEnd time: " << end_time << "\n";
