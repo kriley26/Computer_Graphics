@@ -209,15 +209,7 @@ namespace cge {
         
 	}
 
-	void Sprite::draw_sprite() {        
-        Texture* t = &texture;
-        /*if (t != nullptr && v.getX() != 0) {
-            sti = update_texture(si, sti, texture.get_motion(2));
-        } else if (t != nullptr && v.getY() < 0) {
-            sti = update_texture(si, sti, texture.get_motion(3));
-        } else {
-            sti = update_texture(si, sti, texture.get_motion(1));
-        }*/
+	void Sprite::draw_sprite() {
         sti.m_dst.x = x;
         sti.m_dst.y = y;
         sti.m_dst.w = sti.width;
@@ -236,13 +228,25 @@ namespace cge {
         set_CurrentAnimation(a);
     }
 
-    void Sprite::update_animation() {
+    int Sprite::update_animation(int frame) {
         int maxFrames = 0;
         if (curr_action == cge::ACTIVITY::IDLE) {
             maxFrames = 1;
         }
         else {
             maxFrames = animation.maxFrames;
+        }
+        
+        sti.m_src.x = animation.x + animation.w * frame;
+        sti.m_src.y = animation.y;
+        sti.m_src.w = animation.w;
+        sti.m_src.h = animation.h;
+        
+        frame++;
+        if (frame >= maxFrames) {
+            return 0;
+        } else {
+            return frame;
         }
     }
 

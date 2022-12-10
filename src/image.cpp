@@ -127,9 +127,9 @@ void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo &texture_info,
 	}
 
 	rect = texture_info.m_dst;
-	SDL_Rect = 
+    SDL_Rect source = texture_info.m_src;
 
-	SDL_RenderCopyEx(sdl_info.renderer, texture_info.texture, NULL, &rect, angle, NULL, flip);
+	SDL_RenderCopyEx(sdl_info.renderer, texture_info.texture, &source, &rect, angle, NULL, flip);
 }
 
 } // namespace cge

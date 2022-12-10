@@ -45,7 +45,7 @@ namespace cge {
 		void update_sprite();
 		void draw_sprite();
 		void set_animation(DIRECTION_FACING d);
-		void update_animation();
+		int update_animation(int frame);
 
         string get_name();
         float get_x_pos();

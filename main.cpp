@@ -61,8 +61,6 @@ bool get_time(std::chrono::system_clock::time_point time, double limit) {
 
 int main(int argc, char *argv[])
 {
-	const char* labels[3] = { "HELLO", "HI", "Bye" };
-	cge::Menu(labels);
 
     cge::Map *m;
     cge::Map map = cge::generateMap();
@@ -202,6 +200,7 @@ int main(int argc, char *argv[])
 	allSprites.push_back(s3);
     
     sound.playFile(sound.getBackground(0).c_str());
+    int frameNum = 0;
     
 	while (run_game)
 	{
@@ -216,24 +215,29 @@ int main(int argc, char *argv[])
 				case cge::EventType::UP_DOWN:
 					player.moveUp();
 					player.getCharacter()->update_sprite();
+                    frameNum = player.getCharacter()->update_animation(frameNum);
 					break;
 				case cge::EventType::DOWN_DOWN:
 					player.moveDown();
 					player.getCharacter()->update_sprite();
+                    frameNum = player.getCharacter()->update_animation(frameNum);
 					break;
 				case cge::EventType::LEFT_DOWN:
 					player.moveLeft();
 					player.getCharacter()->update_sprite();
+                    frameNum = player.getCharacter()->update_animation(frameNum);
 					break;
 				case cge::EventType::RIGHT_DOWN:
 					player.moveRight();
 					player.getCharacter()->update_sprite();
+                    frameNum = player.getCharacter()->update_animation(frameNum);
 					break;
 				case cge::EventType::DOWN_UP:
 				case cge::EventType::UP_UP:
 				case cge::EventType::LEFT_UP:
 				case cge::EventType::RIGHT_UP:
 					player.stopMovement();
+                    frameNum = 0;
 					break;
 				default:
 					break;

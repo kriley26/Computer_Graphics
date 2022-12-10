@@ -13,7 +13,7 @@ namespace cge {
 	}
 
 	Menu::Menu(char* labels[]) {
-		NUMOPTS = sizeof(labels);
+		NUMOPTS = sizeof(&labels);
 		cout << NUMOPTS << endl;
 		cout << labels << endl;
 	}

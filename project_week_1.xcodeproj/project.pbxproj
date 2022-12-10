@@ -17,6 +17,9 @@
 		6C89D4CF290F600A00FC1038 /* libSDL2_mixer-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C89D4CE290F600A00FC1038 /* libSDL2_mixer-2.0.0.dylib */; };
 		6C89D4D2290F606800FC1038 /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C89D4D1290F606800FC1038 /* sound.cpp */; };
 		6C89D4DD2919B6AC00FC1038 /* save_game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C89D4DB2919B6AC00FC1038 /* save_game.cpp */; };
+		6C904D4329440B3600690474 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C904D3D29440B3600690474 /* animation.cpp */; };
+		6C904D4429440B3600690474 /* menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C904D3F29440B3600690474 /* menu.cpp */; };
+		6C904D4529440B3600690474 /* sprite_sheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C904D4129440B3600690474 /* sprite_sheet.cpp */; };
 		6CB1824F29005BE8007FF0C5 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1824629005BE7007FF0C5 /* sprite.cpp */; };
 		6CB1825029005BE8007FF0C5 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1824829005BE7007FF0C5 /* vector.cpp */; };
 		6CB1825129005BE8007FF0C5 /* movement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1824B29005BE8007FF0C5 /* movement.cpp */; };
@@ -60,6 +63,12 @@
 		6C89D4DC2919B6AC00FC1038 /* save_game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = save_game.hpp; sourceTree = "<group>"; };
 		6C89D4E0292ABD1200FC1038 /* map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = map.cpp; sourceTree = "<group>"; };
 		6C89D4E1292ABD1200FC1038 /* map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = map.hpp; sourceTree = "<group>"; };
+		6C904D3D29440B3600690474 /* animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
+		6C904D3E29440B3600690474 /* menu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = menu.hpp; sourceTree = "<group>"; };
+		6C904D3F29440B3600690474 /* menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = menu.cpp; sourceTree = "<group>"; };
+		6C904D4029440B3600690474 /* sprite_sheet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sprite_sheet.hpp; sourceTree = "<group>"; };
+		6C904D4129440B3600690474 /* sprite_sheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_sheet.cpp; sourceTree = "<group>"; };
+		6C904D4229440B3600690474 /* animation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animation.hpp; sourceTree = "<group>"; };
 		6CB1824529005BE7007FF0C5 /* player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
 		6CB1824629005BE7007FF0C5 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		6CB1824729005BE7007FF0C5 /* texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
@@ -119,6 +128,12 @@
 		42B1EA24281AB2DF00836A74 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6C904D3D29440B3600690474 /* animation.cpp */,
+				6C904D4229440B3600690474 /* animation.hpp */,
+				6C904D3F29440B3600690474 /* menu.cpp */,
+				6C904D3E29440B3600690474 /* menu.hpp */,
+				6C904D4129440B3600690474 /* sprite_sheet.cpp */,
+				6C904D4029440B3600690474 /* sprite_sheet.hpp */,
 				6C89D4E0292ABD1200FC1038 /* map.cpp */,
 				6C89D4E1292ABD1200FC1038 /* map.hpp */,
 				6C89D4DB2919B6AC00FC1038 /* save_game.cpp */,
@@ -206,13 +221,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C904D4529440B3600690474 /* sprite_sheet.cpp in Sources */,
 				6CC84F94292AD09600E3CBDF /* map.cpp in Sources */,
 				42B1EA2E281AB2DF00836A74 /* input.cpp in Sources */,
 				6C89D4C7290656DA00FC1038 /* box.cpp in Sources */,
 				42B1EA2D281AB2DF00836A74 /* main.cpp in Sources */,
+				6C904D4329440B3600690474 /* animation.cpp in Sources */,
 				6CB1825329005BE8007FF0C5 /* player.cpp in Sources */,
 				6C89D4D2290F606800FC1038 /* sound.cpp in Sources */,
 				6CB1825029005BE8007FF0C5 /* vector.cpp in Sources */,
+				6C904D4429440B3600690474 /* menu.cpp in Sources */,
 				6C89D4DD2919B6AC00FC1038 /* save_game.cpp in Sources */,
 				6CB1825129005BE8007FF0C5 /* movement.cpp in Sources */,
 				42B1EA2F281AB2DF00836A74 /* image.cpp in Sources */,
