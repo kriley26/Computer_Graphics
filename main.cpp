@@ -86,8 +86,8 @@ int main(int argc, char *argv[])
 
 	cge::SDLInfo sdl_info;
 
-	constexpr int SCREEN_WIDTH = 1200;
-	constexpr int SCREEN_HEIGHT = 900;
+	constexpr int SCREEN_WIDTH = 2500;
+	constexpr int SCREEN_HEIGHT = 1500;
 	cge::create_sdl_components(sdl_info, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	cge::init_sdl_image();
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	// Sprite Sheets
 	cge::SpriteSheet* chad_sheet = cge::import_spritesheet(chad_texture_path);
 	cge::SpriteSheet* brad_sheet = cge::import_spritesheet(brad_texture_path);
-	cge::SpriteSheet* man_sheet = cge::import_spritesheet(man_texture_path);
+	cge::SpriteSheet* man_sheet = new cge::SpriteSheet(man_texture_path);
     
     cge::Sound sound;
     sound.loadFiles(0, &background_one_path);

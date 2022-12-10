@@ -64,6 +64,7 @@ SDLEventInfo get_current_events()
 				case SDLK_w:
 				case SDLK_UP:
 					event_info.events[num_events++] = EventType::UP_UP;
+					break;
 				case SDLK_a:
 				case SDLK_LEFT:
 					event_info.events[num_events++] = EventType::LEFT_UP;

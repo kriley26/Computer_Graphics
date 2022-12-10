@@ -10,6 +10,7 @@ Author: Keegan Riley
 #include <chrono>
 #include <thread>
 #include <map>
+#include <unordered_map>
 
 #include "src/info.hpp"
 #include "src/image.hpp"
@@ -63,7 +64,7 @@ namespace cge {
         void set_screenHeight(float screenH);
         void set_screenWidth(float screenW);
         void set_Sound(Sound* s);
-		void set_CurrentAnimation(Animation a);
+		void set_CurrentAnimation(Animation *a);
 		void set_CurrentAction(ACTIVITY a);
 
 
@@ -76,7 +77,7 @@ namespace cge {
 		int angle = 0;
 		float screenWidth = 0;
 		float screenHeight = 0;
-		map<DIRECTION_FACING, Animation> animations;
+		unordered_map<int, Animation*> animations;
 
 		SDLInfo si;
 		SDLTextureInfo sti;
@@ -86,7 +87,7 @@ namespace cge {
 		SpriteSheet* sheet;
 		Box box;
 		Sound* sound;
-		Animation animation;
+		Animation* animation;
 		ACTIVITY curr_action = ACTIVITY::IDLE;
 		
 	};

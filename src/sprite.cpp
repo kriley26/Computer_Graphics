@@ -68,6 +68,7 @@ namespace cge {
         v = Vector(0, 0);
         sound = s;
         animations = sheet->parse_animations();
+        animation = animations.at(2);
     }
 
     Sprite::Sprite(std::string arr[]) {
@@ -212,8 +213,8 @@ namespace cge {
 	void Sprite::draw_sprite() {
         sti.m_dst.x = x;
         sti.m_dst.y = y;
-        sti.m_dst.w = sti.width;
-        sti.m_dst.h = sti.height;
+        sti.m_dst.w = sto.width;
+        sti.m_dst.h = sto.height;
         
 		if (face_backwards) {
 			render_texture(si, sti, x, y, angle, SDL_FLIP_HORIZONTAL, sto);
@@ -224,7 +225,8 @@ namespace cge {
 	}
 
     void Sprite::set_animation(DIRECTION_FACING d) {
-        Animation a = animations.at(d);
+        int i = int(d);
+        Animation *a = animations.at(i);
         set_CurrentAnimation(a);
     }
 
@@ -234,13 +236,13 @@ namespace cge {
             maxFrames = 1;
         }
         else {
-            maxFrames = animation.maxFrames;
+            maxFrames = animation->maxFrames;
         }
         
-        sti.m_src.x = animation.x + animation.w * frame;
-        sti.m_src.y = animation.y;
-        sti.m_src.w = animation.w;
-        sti.m_src.h = animation.h;
+        sti.m_src.x = animation->x + animation->w * frame;
+        sti.m_src.y = animation->y;
+        sti.m_src.w = animation->w;
+        sti.m_src.h = animation->h;
         
         frame++;
         if (frame >= maxFrames) {
@@ -314,7 +316,7 @@ namespace cge {
         sound = s;
     }
 
-    void Sprite::set_CurrentAnimation(Animation a) {
+    void Sprite::set_CurrentAnimation(Animation *a) {
         animation = a;
     }
 

@@ -9,6 +9,8 @@
 
 #include <chrono>
 #include <thread>
+#include <map>
+#include <unordered_map>
 
 #include "src/info.hpp"
 #include "src/image.hpp"
@@ -27,7 +29,7 @@ namespace cge {
 		SpriteSheet(string filepath);
 		~SpriteSheet();
 		string get_file();
-		map<DIRECTION_FACING, Animation> parse_animations();
+		unordered_map<int, Animation*> parse_animations();
 	};
 
 	SpriteSheet* import_spritesheet(string filepath);

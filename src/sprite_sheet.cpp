@@ -1,6 +1,8 @@
 #include <chrono>
 #include <thread>
+#include <iostream>
 #include <map>
+#include <unordered_map>
 
 #include "src/info.hpp"
 #include "src/image.hpp"
@@ -28,12 +30,12 @@ namespace cge {
 		return filepath;
 	}
 
-	map<DIRECTION_FACING, Animation> SpriteSheet::parse_animations() {
-		map<DIRECTION_FACING, Animation> map;
-		map.emplace(DIRECTION_FACING::LEFT, new Animation(0, 0, 300, 480, 2));
-		map.emplace(DIRECTION_FACING::UP, new Animation(600, 0, 300, 480, 3));
-		map.emplace(DIRECTION_FACING::RIGHT, new Animation(0, 480, 300, 480, 2));
-		map.emplace(DIRECTION_FACING::DOWN, new Animation(600, 480, 300, 480, 3));
+	unordered_map<int, Animation*> SpriteSheet::parse_animations() {
+		unordered_map<int, Animation*> map = {};
+		map.insert(pair<int, Animation*>(int(DIRECTION_FACING::LEFT), new Animation(0, 0, 300, 480, 2)));
+		map.insert(pair<int, Animation*>(int(DIRECTION_FACING::UP), new Animation(600, 0, 300, 480, 3)));
+		map.insert(pair<int, Animation*>(int(DIRECTION_FACING::RIGHT), new Animation(0, 480, 300, 480, 2)));
+		map.insert(pair<int, Animation*>(int(DIRECTION_FACING::DOWN), new Animation(600, 480, 300, 480, 3)));
 		return map;
 	}
 
