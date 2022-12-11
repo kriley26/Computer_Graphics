@@ -216,7 +216,7 @@ namespace cge {
         sti.m_dst.w = sto.width;
         sti.m_dst.h = sto.height;
         
-		if (face_backwards) {
+		if (false) {
 			render_texture(si, sti, x, y, angle, SDL_FLIP_HORIZONTAL, sto);
 		}
 		else {

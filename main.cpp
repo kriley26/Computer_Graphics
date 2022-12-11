@@ -60,6 +60,90 @@ bool get_time(std::chrono::system_clock::time_point time, double limit) {
 	}
 }
 
+int show_main_menu(cge::SDLInfo info, TTF_Font* font) {
+
+	SDL_Surface* screen = SDL_GetWindowSurface(info.window);
+	Uint32 time;
+	int x, y;
+	const int NUMMENU = 3;
+	const char* labels[NUMMENU] = { "New Game", "Load Game", "Exit" };
+	SDL_Surface* options[NUMMENU];
+	bool selected[NUMMENU] = { 0, 0, 0 };
+	SDL_Color color[2] = { {255, 255, 255}, {255, 0, 0} };
+	
+	options[0] = TTF_RenderText_Solid(font, labels[0], color[0]);
+	options[1] = TTF_RenderText_Solid(font, labels[1], color[0]);
+	options[2] = TTF_RenderText_Solid(font, labels[2], color[0]);
+	
+	SDL_Rect pos[NUMMENU];
+	pos[0].x = screen->clip_rect.w / 2 - options[0]->clip_rect.w / 2;
+	pos[0].y = screen->clip_rect.h / 2 - options[0]->clip_rect.h;
+	pos[1].x = screen->clip_rect.w / 2 - options[0]->clip_rect.w / 2;
+	pos[1].y = screen->clip_rect.h / 2;
+	pos[2].x = screen->clip_rect.w / 2 - options[0]->clip_rect.w / 2;
+	pos[2].y = screen->clip_rect.h / 2 + options[0]->clip_rect.h;
+
+	SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0x00, 0x00, 0x00));
+	SDL_UpdateWindowSurface(info.window);
+
+	SDL_Event event;
+	while (1) {
+		time = SDL_GetTicks();
+		while (SDL_PollEvent(&event)) {
+			switch (event.type) {
+			case SDL_QUIT:
+				for (int i = 0; i < NUMMENU; i++)
+					SDL_FreeSurface(options[i]);
+				return 2;
+			case SDL_MOUSEMOTION:
+				x = event.motion.x;
+				y = event.motion.y;
+				for (int i = 0; i < NUMMENU; i++) {
+					if (x >= pos[i].x && x <= pos[i].x + pos[i].w && y >= pos[i].y && y <= pos[i].y + pos[i].h) {
+						if (!selected[i]) {
+							selected[i] = 1;
+							SDL_FreeSurface(options[i]);
+							options[i] = TTF_RenderText_Solid(font, labels[i], color[1]);
+						}
+					}
+					else {
+						if (selected[i]) {
+							selected[i] = 0;
+							SDL_FreeSurface(options[i]);
+							options[i] = TTF_RenderText_Solid(font, labels[i], color[0]);
+						}
+					}
+				}
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				x = event.button.x;
+				y = event.button.y;
+				for (int i = 0; i < NUMMENU; i++) {
+					if (x >= pos[i].x && x <= pos[i].x + pos[i].w && y >= pos[i].y && y <= pos[i].y + pos[i].h) {
+						for (int j = 0; j < NUMMENU; j++)
+							SDL_FreeSurface(options[j]);
+						return i;
+					}
+				}
+				break;
+			case SDL_KEYDOWN:
+				if (event.key.keysym.sym == SDLK_ESCAPE) {
+					for (int i = 0; i < NUMMENU; i++) {
+						SDL_FreeSurface(options[i]);
+					}
+					return 2;
+				}
+			}
+		}
+		for (int i = 0; i < NUMMENU; i++)
+			SDL_BlitSurface(options[i], NULL, screen, &pos[i]);
+		SDL_UpdateWindowSurface(info.window);
+		if (1000 / 30 > (SDL_GetTicks() - time))
+			SDL_Delay(1000 / 30 - (SDL_GetTicks() - time));
+	}
+	
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -82,13 +166,14 @@ int main(int argc, char *argv[])
     cout << "Map2: " << &map2 << endl;
     
 	cge::init_sdl();
+	TTF_Init();
     
     //cge::create_json();
 
 	cge::SDLInfo sdl_info;
 
-	constexpr int SCREEN_WIDTH = 2500;
-	constexpr int SCREEN_HEIGHT = 1500;
+	constexpr int SCREEN_WIDTH = 1500;
+	constexpr int SCREEN_HEIGHT = 900;
 	cge::create_sdl_components(sdl_info, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	cge::init_sdl_image();
@@ -138,6 +223,10 @@ int main(int argc, char *argv[])
 	box_opts.color_mod[0] = 128;
 	box_opts.color_mod[1] = 50;
 	box_opts.color_mod[2] = 75;
+
+	TTF_Font* font;
+	auto file = resource_path + std::string("fonts/Pacifico.ttf");
+	font = TTF_OpenFont(file.c_str(), 20);
 
 	bool run_game = true;
 	double updateSpeed = .075;
@@ -202,6 +291,10 @@ int main(int argc, char *argv[])
     
     sound.playFile(sound.getBackground(0).c_str());
     int frameNum = 0;
+
+	int menuSelection = show_main_menu(sdl_info, font);
+	if (menuSelection == 2)
+		run_game = false;
     
 	while (run_game)
 	{

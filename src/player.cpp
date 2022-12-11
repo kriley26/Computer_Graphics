@@ -42,7 +42,7 @@ namespace cge {
 		Vector v = Vector(-5, 0);
 		sprite->passVector(v);
 		sprite->set_CurrentAction(ACTIVITY::WALK);
-        sprite->set_animation(DIRECTION_FACING::RIGHT);
+        sprite->set_animation(DIRECTION_FACING::LEFT);
 	}
 
 	void Player::moveRight() {
