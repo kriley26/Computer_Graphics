@@ -13,6 +13,7 @@ For more information, please refer to <https://unlicense.org>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "src/image.hpp"
 #include "src/info.hpp"
