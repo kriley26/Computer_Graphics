@@ -35,11 +35,22 @@ namespace cge {
 			NPC,
 			Nature
 		};
+		enum STATUS {
+			NA,
+			UNCAPTURED,
+			CAPTURED
+		};
 
 		const char* convert_type_enum[3] = {
 			STRINGIFY(Player),
 			STRINGIFY(NPC),
 			STRINGIFY(Nature)
+		};
+
+		const char* convert_status_enum[3] = {
+			STRINGIFY(NA),
+			STRINGIFY(UNCAPTURED),
+			STRINGIFY(CAPTURED)
 		};
 
 		Sprite();
@@ -57,12 +68,18 @@ namespace cge {
         Box* getOutline();
 		void reverseDirection(Vector::Direction, float position);
         void detectCollision(Sprite* s);
-		void update_sprite();
-		void draw_sprite(SDL_Rect cameraRect);
+		void capture_zone(Sprite* s);
+		virtual void update_status(STATUS s);
+		virtual void update_sprite();
+		virtual void draw_sprite(SDL_Rect cameraRect);
 		void set_animation(DIRECTION_FACING d);
 		int update_animation(int frame);
 		string convert_type();
+		string convert_status();
 
+		SDLInfo get_sdl_info();
+		SDLTextureOptions get_sto();
+		SDLTextureInfo get_sti();
         string get_name();
         float get_x_pos();
 		float get_center_x();
@@ -75,6 +92,8 @@ namespace cge {
         float get_screenwidth();
         float get_screenheight();
 		SpriteType get_type();
+		virtual STATUS get_status();
+		string get_nature_type();
 
 		void set_x_pos(float pos);
 		void set_y_pos(float pos);
@@ -89,9 +108,11 @@ namespace cge {
 		void set_CurrentAnimation(Animation *a);
 		void set_CurrentAction(ACTIVITY a);
 		void set_type(SpriteType s);
+		void set_nature_type(string type);
+		void set_status(STATUS s);
 
 
-	private:
+	protected:
 		float x, y, width, height;
 		string path;
 		string name;
@@ -100,7 +121,9 @@ namespace cge {
 		int angle = 0;
 		float screenWidth = 0;
 		float screenHeight = 0;
+		string natureType;
 		SpriteType type;
+		STATUS status = NA;
 		unordered_map<int, Animation*> animations;
 
 		SDLInfo si;

@@ -10,6 +10,7 @@
 #include "src/vector.hpp"
 #include "src/movement.hpp"
 #include "src/sprite_sheet.hpp"
+#include "src/capture_zone.hpp"
 
 namespace cge {
 
@@ -97,6 +98,7 @@ namespace cge {
         sto.width = width;
         sto.height = height;
         box = Box(x, x+width, y, y+height);
+        v = Vector(0, 0);
     }
 
 	Sprite::~Sprite() {
@@ -143,7 +145,8 @@ namespace cge {
     }
 
     void Sprite::reverseDirection(Vector::Direction d, float position) {
-        v.reverseDirection(d);
+        if (type == NPC)
+            v.reverseDirection(d);
         switch (d) {
         case Vector::LEFT_DIR:
         case Vector::RIGHT_DIR:
@@ -160,40 +163,56 @@ namespace cge {
 
     void Sprite::detectCollision(Sprite* s) {
         //Check if sprite is overlapping in x direction & reverse direction
-        print();
-        s->print();
-        
-        // Left Hand Check
-        if (box.getMaxX() >= s->box.getMinX() && box.getMaxX() < s->box.getMaxX() &&
-            s->box.getMinY() <= box.getMaxY() && s->box.getMaxY() >= box.getMinY()) {
-            cout << "Left Hand" << endl;
-            reverseDirection(Vector::LEFT_DIR, s->box.getMinX());
-            sound->playFile(sound->getHit(0).c_str());
-        }
+        if (strcmp(s->get_nature_type().c_str(), "CaptureZone") != 0) {
+            // Right Hand Check
+            if (box.getMaxX() >= s->box.getMinX() && box.getMaxX() < s->box.getMaxX() && box.getMaxY() > s->box.getMinY() && box.getMinY() < s->box.getMaxY()) {
+                cout << "Left Hand" << endl;
+                reverseDirection(Vector::LEFT_DIR, box.getPrevMaxX() - 10);
+                sound->getHit(0);
+            }
 
-        // Right Hand Check
-        else if (box.getMinX() <= s->box.getMaxX() && box.getMinX() > s->box.getMinX() &&
-            s->box.getMinY() <= box.getMaxY() && s->box.getMaxY() >= box.getMinY()) {
-            cout << "Right Hand" << endl;
-            reverseDirection(Vector::RIGHT_DIR, s->box.getMaxX());
-            sound->playFile(sound->getHit(0).c_str());
-        }
+            // Left Hand Check
+            else if (box.getMinX() <= s->box.getMaxX() && box.getMinX() > s->box.getMinX() &&
+                s->box.getMinY() < box.getMaxY() && s->box.getMaxY() > box.getMinY()) {
+                cout << "Right Hand" << endl;
+                reverseDirection(Vector::RIGHT_DIR, box.getPrevMinX() + box.getWidth() + 10);
+                sound->getHit(0);
+            }
 
-        // Top Check
-        else if (box.getMaxY() >= s->box.getMinY() && box.getMaxY() < s->box.getMaxY() &&
-            s->box.getMaxX() >= box.getMinX() && s->box.getMinX() <= box.getMaxX()) {
-            cout << "Top Check" << endl;
-            reverseDirection(Vector::BOTTOM_DIR, s->box.getMinY());
-            sound->playFile(sound->getHit(0).c_str());
-        } 
-        
-        // Bottom Check
-        else if (box.getMinY() <= s->box.getMaxY() && box.getMinY() > s->box.getMinY() && 
-            s->box.getMinX() <= box.getMaxX() && s->box.getMaxX() >= box.getMinX()) {
-            cout << "Bottom Check" << endl;
-            reverseDirection(Vector::TOP_DIR, s->box.getMaxY());
-            sound->playFile(sound->getHit(0).c_str());
+            // Bottom Check
+            else if (box.getMaxY() >= s->box.getMinY() && box.getMaxY() < s->box.getMaxY() &&
+                s->box.getMaxX() > box.getMinX() && s->box.getMinX() < box.getMaxX()) {
+                cout << "Top Check" << endl;
+                reverseDirection(Vector::BOTTOM_DIR, box.getPrevMaxY() - 10);
+                sound->getHit(0);
+            }
+
+            // Top Check
+            else if (box.getMinY() <= s->box.getMaxY() && box.getMinY() > s->box.getMinY() &&
+                s->box.getMinX() < box.getMaxX() && s->box.getMaxX() > box.getMinX()) {
+                cout << "Bottom Check" << endl;
+                reverseDirection(Vector::TOP_DIR, box.getPrevMinY() + box.getHeight() + 10);
+                sound->getHit(0);
+            }
         }
+    }
+
+    void Sprite::capture_zone(Sprite* s) {
+        cout << s->get_nature_type() << " ";
+        if (((box.getMaxX() >= s->box.getMinX() && box.getMaxX() <= s->box.getMaxX()) ||
+            (box.getMinX() >= s->box.getMinX() && box.getMinX() <= s->box.getMaxX())) &&
+            ((box.getMaxY() >= s->box.getMinY() && box.getMaxY() <= s->box.getMaxY()) ||
+            (box.getMinY() <= s->box.getMaxY() && box.getMinY() >= s->box.getMaxY()))) {
+            s->update_status(STATUS::CAPTURED);
+        }
+    }
+
+    void Sprite::update_status(STATUS s) {
+
+    }
+
+    Sprite::STATUS Sprite::get_status() {
+        return status;
     }
 
 	void Sprite::update_sprite() {
@@ -204,19 +223,19 @@ namespace cge {
 
         if (box.getMaxX() >= screenWidth) {
             reverseDirection(Vector::LEFT_DIR, screenWidth);
-            sound->playFile(sound->getHit(1).c_str());
+            sound->getHit(1);
         }
         else if (box.getMinX() <= 0) {
             reverseDirection(Vector::RIGHT_DIR, box.getWidth());
-            sound->playFile(sound->getHit(1).c_str());
+            sound->getHit(1);
         }
         else if (box.getMaxY() >= screenHeight) {
             reverseDirection(Vector::TOP_DIR, screenHeight);
-            sound->playFile(sound->getHit(1).c_str());
+            sound->getHit(1);
         }
         else if (box.getMinY() <= 0) {
             reverseDirection(Vector::BOTTOM_DIR, box.getHeight());
-            sound->playFile(sound->getHit(1).c_str());
+            sound->getHit(1);
         }
 
 		if (is_spinning) {
@@ -271,6 +290,24 @@ namespace cge {
         int t = int(get_type());
         string MyStr(convert_type_enum[t]);
         return MyStr;
+    }
+
+    string Sprite::convert_status() {
+        int r = int(get_status());
+        string s(convert_status_enum[r]);
+        return s;
+    }
+
+    SDLInfo Sprite::get_sdl_info() {
+        return si;
+    }
+
+    SDLTextureOptions Sprite::get_sto() {
+        return sto;
+    }
+
+    SDLTextureInfo Sprite::get_sti() {
+        return sti;
     }
 
     std::string Sprite::get_name() {
@@ -333,6 +370,10 @@ namespace cge {
         return type;
     }
 
+    string Sprite::get_nature_type() {
+        return natureType;
+    }
+
     void Sprite::set_Name(string s) {
         name = s;
     }
@@ -376,5 +417,13 @@ namespace cge {
 
     void Sprite::set_type(Sprite::SpriteType t) {
         type = t;
+    }
+
+    void Sprite::set_nature_type(string type) {
+        natureType = type;
+    }
+
+    void Sprite::set_status(STATUS s) {
+        update_status(s);
     }
 }

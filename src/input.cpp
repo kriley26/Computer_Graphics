@@ -34,7 +34,7 @@ SDLEventInfo get_current_events()
 					event_info.events[num_events++] = EventType::QUIT;
 					break;
 				case SDLK_SPACE:
-					event_info.events[num_events++] = EventType::PLAY_SOUND;
+					event_info.events[num_events++] = EventType::INTERACT;
 					break;
 				case SDLK_m:
 					event_info.events[num_events++] = EventType::TOGGLE_MUSIC;
@@ -57,6 +57,9 @@ SDLEventInfo get_current_events()
 					break;
 				case SDLK_p:
 					event_info.events[num_events++] = EventType::PAUSE;
+					break;
+				case SDLK_b:
+					event_info.events[num_events++] = EventType::PLAY_SOUND;
 					break;
 				default:
 					break;

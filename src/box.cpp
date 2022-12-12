@@ -45,6 +45,22 @@ namespace cge {
         return maxY;
     }
 
+    float Box::getPrevMinX() {
+        return prevMinX;
+    }
+
+    float Box::getPrevMinY() {
+        return prevMinY;
+    }
+
+    float Box::getPrevMaxX() {
+        return prevMaxX;
+    }
+
+    float Box::getPrevMaxY() {
+        return prevMaxY;
+    }
+
     float Box::getWidth() {
         return width;
     }
@@ -66,6 +82,11 @@ namespace cge {
     }
 
     void Box::updateValues(float x1, float y1) {
+        prevMinX = minX;
+        prevMinY = minY;
+        prevMaxX = maxX;
+        prevMaxY = maxY;
+
         minX = minX + x1;
         maxX = maxX + x1;
         minY = minY + y1;

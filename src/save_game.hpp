@@ -25,6 +25,8 @@ namespace cge {
 // Binary Save Data
 string create_sprite_data(Sprite* sprite);
 Sprite* parse_data(string sprite);
+Sprite* parse_level(string data);
+string parse_type(string data);
 void save_game(vector<Sprite*> sprites);
 vector<Sprite*> load_game(string file);
 

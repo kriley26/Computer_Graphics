@@ -11,8 +11,10 @@ Author: Keegan Riley
 #include <thread>
 #include <string>
 #include <vector>
+#include <SDL2/SDL_mixer.h>
 
 #include "src/info.hpp"
+
 
 namespace cge {
 
@@ -24,14 +26,24 @@ private:
     std::string* background_two;
     std::string* wall_hit;
     std::string* character_hit;
+    std::vector<Mix_Chunk*> sounds;
+    std::vector<Mix_Music*> music;
+    int volume;
     
 public:
     Sound();
     ~Sound();
     void loadFiles(int choice, std::string *f);
     void playFile(const char* filepath);
-    std::string getBackground(int choice);
-    std::string getHit(int choice);
+    int getBackground(int choice);
+    int getHit(int choice);
+
+    void setVolume(int v);
+    int loadMusic(const char* filename);
+    int loadSound(const char* filename);
+
+    int playMusic(int m);
+    int playSound(int s);
 };
 }
 

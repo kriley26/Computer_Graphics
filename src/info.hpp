@@ -33,7 +33,8 @@ enum class EventType
 	RIGHT_UP,
 	RIGHT_DOWN,
 	LEFT_UP,
-	LEFT_DOWN
+	LEFT_DOWN,
+	INTERACT
 };
 
 enum DIRECTION_FACING : int {

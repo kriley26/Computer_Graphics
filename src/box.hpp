@@ -19,6 +19,7 @@ namespace cge {
         
     private:
         float minX, minY, maxX, maxY, width, height;
+        float prevMinX, prevMinY, prevMaxX, prevMaxY;
         
     public:
         Box();
@@ -28,6 +29,10 @@ namespace cge {
         float getMaxX();
         float getMinY();
         float getMaxY();
+        float getPrevMinX();
+        float getPrevMinY();
+        float getPrevMaxX();
+        float getPrevMaxY();
         float getWidth();
         float getHeight();
         float moveXPos(float position);

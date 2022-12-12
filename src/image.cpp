@@ -132,6 +132,12 @@ void render_texture(const SDLInfo& sdl_info, const SDLTextureInfo &texture_info,
 	SDL_RenderCopyEx(sdl_info.renderer, texture_info.texture, &source, &rect, angle, NULL, flip);
 }
 
+void render_rect(const SDLInfo& sdl_info, const SDLTextureInfo& texture_info, int x_pos, int y_pos, std::optional<SDLTextureOptions> texture_mods)
+{
+	SDL_Rect rect = texture_info.m_dst;
+	SDL_RenderFillRect(sdl_info.renderer, &rect);
+}
+
 } // namespace cge
 
 
