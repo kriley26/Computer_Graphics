@@ -28,14 +28,16 @@ string create_box_data(Box* box) {
 
 string create_sprite_data(Sprite* s) {
     string returnString = "";
-    returnString += s->get_name() + "," + to_string( s->get_x_pos()) + "," + to_string(s->get_y_pos()) + "," + to_string(s->get_angle()) + "," + (s->get_spinning() ? "true" : "false") + "," + to_string(s->get_screenwidth()) + "," + to_string(s->get_screenheight()) + "," + create_box_data(s->getOutline());
+    returnString += s->get_name() + "," + to_string( s->get_x_pos()) + "," + to_string(s->get_y_pos()) + "," + to_string(s->get_width()) + ","
+        + to_string(s->get_height()) + "," + to_string(s->get_angle()) + "," + (s->get_spinning() ? "true" : "false") + "," 
+        + to_string(s->get_screenwidth()) + "," + to_string(s->get_screenheight()) + "," + s->convert_type();
     return returnString;
 }
 
 Sprite* parse_data(string sprite) {
     Sprite* s = new Sprite();
     size_t length = sprite.length();
-    string array[11];
+    string array[10];
     char* char_array = new char[length+1];
     strcpy(char_array, sprite.c_str());
 
@@ -46,7 +48,7 @@ Sprite* parse_data(string sprite) {
         token = strtok(NULL, ",");
         pos++;
     }
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 10; i++) {
         cout << array[i] << ",";
     }
     s = new Sprite(array);

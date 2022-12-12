@@ -28,35 +28,38 @@ SDLEventInfo get_current_events()
 				event_info.events[num_events++] = EventType::QUIT;
 				break;
 			case SDL_KEYDOWN:
-				switch(e.key.keysym.sym)
+				switch (e.key.keysym.sym)
 				{
-					case SDLK_ESCAPE: 
-						event_info.events[num_events++] = EventType::QUIT;
-						break;
-					case SDLK_SPACE: 
-						event_info.events[num_events++] = EventType::PLAY_SOUND;
-						break;
-					case SDLK_m: 
-						event_info.events[num_events++] = EventType::TOGGLE_MUSIC;
-						break;
-					case SDLK_w:
-					case SDLK_UP:
-						event_info.events[num_events++] = EventType::UP_DOWN;
-						break;
-					case SDLK_a:
-					case SDLK_LEFT:
-						event_info.events[num_events++] = EventType::LEFT_DOWN;
-						break;
-					case SDLK_s:
-					case SDLK_DOWN:
-						event_info.events[num_events++] = EventType::DOWN_DOWN;
-						break;
-					case SDLK_d:
-					case SDLK_RIGHT:
-						event_info.events[num_events++] = EventType::RIGHT_DOWN;
-						break;
-					default:
-						break;
+				case SDLK_ESCAPE:
+					event_info.events[num_events++] = EventType::QUIT;
+					break;
+				case SDLK_SPACE:
+					event_info.events[num_events++] = EventType::PLAY_SOUND;
+					break;
+				case SDLK_m:
+					event_info.events[num_events++] = EventType::TOGGLE_MUSIC;
+					break;
+				case SDLK_w:
+				case SDLK_UP:
+					event_info.events[num_events++] = EventType::UP_DOWN;
+					break;
+				case SDLK_a:
+				case SDLK_LEFT:
+					event_info.events[num_events++] = EventType::LEFT_DOWN;
+					break;
+				case SDLK_s:
+				case SDLK_DOWN:
+					event_info.events[num_events++] = EventType::DOWN_DOWN;
+					break;
+				case SDLK_d:
+				case SDLK_RIGHT:
+					event_info.events[num_events++] = EventType::RIGHT_DOWN;
+					break;
+				case SDLK_p:
+					event_info.events[num_events++] = EventType::PAUSE;
+					break;
+				default:
+					break;
 				}
 				break;
 			case SDL_KEYUP:

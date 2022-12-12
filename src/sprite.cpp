@@ -52,7 +52,7 @@ namespace cge {
         sound = s;
 	}
 
-    Sprite::Sprite(float x1, float y1, SDLInfo si1, SpriteSheet* ss, int width1, int height1, float scrW, float scrH, Sound* s) {
+    Sprite::Sprite(float x1, float y1, SDLInfo si1, SpriteSheet* ss, int width1, int height1, float scrW, float scrH, Sound* s, SpriteType spriteType) {
         si = si1;
         sheet = ss;
         sti = create_texture(si, ss->get_file());
@@ -61,6 +61,8 @@ namespace cge {
         path = ss->get_file();
         x = x1;
         y = y1;
+        width = width1;
+        height = height1;
         box = Box(x, x + width1, y, y + height1);
         screenWidth = scrW;
         screenHeight = scrH;
@@ -69,19 +71,32 @@ namespace cge {
         sound = s;
         animations = sheet->parse_animations();
         animation = animations.at(2);
+        type = spriteType;
+        update_animation(1);
     }
 
     Sprite::Sprite(std::string arr[]) {
         name = arr[0];
         x = stof(arr[1]);
         y = stof(arr[2]);
-        angle = stoi(arr[3]);
-        istringstream(arr[4]) >> std::boolalpha >> is_spinning;
-        screenWidth = stof(arr[5]);
-        screenHeight = stof(arr[6]);
-        sto.width = stof(arr[8]) - stof(arr[7]);
-        sto.height = stof(arr[10]) - stof(arr[9]);
-        box = Box(stof(arr[7]), stof(arr[8]), stof(arr[9]), stof(arr[10]));
+        width = stof(arr[3]);
+        height = stof(arr[4]);
+        angle = stoi(arr[5]);
+        istringstream(arr[6]) >> std::boolalpha >> is_spinning;
+        screenWidth = stof(arr[7]);
+        screenHeight = stof(arr[8]);
+        if (strcmp("Player", arr[9].c_str()) == 0) {
+            set_type(SpriteType::Player);
+        }
+        else if (strcmp("NPC", arr[9].c_str()) == 0) {
+            set_type(SpriteType::NPC);
+        }
+        else if (strcmp("Nature", arr[9].c_str()) == 0) {
+            set_type(SpriteType::Nature);
+        }
+        sto.width = width;
+        sto.height = height;
+        box = Box(x, x+width, y, y+height);
     }
 
 	Sprite::~Sprite() {
@@ -210,9 +225,9 @@ namespace cge {
         
 	}
 
-	void Sprite::draw_sprite() {
-        sti.m_dst.x = x;
-        sti.m_dst.y = y;
+	void Sprite::draw_sprite(SDL_Rect cameraRect) {
+        sti.m_dst.x = x - cameraRect.x;
+        sti.m_dst.y = y - cameraRect.y;
         sti.m_dst.w = sto.width;
         sti.m_dst.h = sto.height;
         
@@ -252,6 +267,12 @@ namespace cge {
         }
     }
 
+    string Sprite::convert_type() {
+        int t = int(get_type());
+        string MyStr(convert_type_enum[t]);
+        return MyStr;
+    }
+
     std::string Sprite::get_name() {
         return name;
     }
@@ -266,6 +287,10 @@ namespace cge {
         cout << x << endl;
     }
 
+    float Sprite::get_center_x() {
+        return x + float(sto.width / 2);
+    }
+
     float Sprite::get_y_pos() {
         return y;
     }
@@ -274,6 +299,18 @@ namespace cge {
         cout << y << " , " << pos << endl;
         y = box.moveYPos(pos);
         cout << y << endl;
+    }
+
+    float Sprite::get_center_y() {
+        return y + float(sto.height / 2);
+    }
+
+    float Sprite::get_width() {
+        return width;
+    }
+
+    float Sprite::get_height() {
+        return height;
     }
 
     int Sprite::get_angle() {
@@ -292,6 +329,10 @@ namespace cge {
         return screenHeight;
     }
 
+    Sprite::SpriteType Sprite::get_type() {
+        return type;
+    }
+
     void Sprite::set_Name(string s) {
         name = s;
     }
@@ -302,6 +343,15 @@ namespace cge {
 
     void Sprite::set_Texture(cge::Texture t) {
         texture = t;
+        sti = create_texture(si, t.get_motion(1));
+    }
+
+    void Sprite::set_SpriteSheet(SpriteSheet* s) {
+        sheet = s;
+        sti = create_texture(si, s->get_file());
+        animations = sheet->parse_animations();
+        animation = animations.at(2);
+        update_animation(1);
     }
 
     void Sprite::set_screenWidth(float screenW) {
@@ -322,5 +372,9 @@ namespace cge {
 
     void Sprite::set_CurrentAction(ACTIVITY a) {
         curr_action = a;
+    }
+
+    void Sprite::set_type(Sprite::SpriteType t) {
+        type = t;
     }
 }

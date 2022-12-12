@@ -23,7 +23,6 @@ using namespace std;
 namespace cge {
 
 // Binary Save Data
-string create_box_data(Box* box);
 string create_sprite_data(Sprite* sprite);
 Sprite* parse_data(string sprite);
 void save_game(vector<Sprite*> sprites);

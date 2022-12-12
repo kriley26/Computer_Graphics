@@ -25,6 +25,7 @@ enum class EventType
 	PLAY_SOUND,
 	TOGGLE_MUSIC,
 	QUIT,
+	PAUSE,
 	UP_UP, 
 	UP_DOWN,
 	DOWN_UP,
@@ -45,7 +46,7 @@ enum DIRECTION_FACING : int {
 enum class ACTIVITY {
 	IDLE,
 	WALK
-};
+}; 
 
 struct SDLEventInfo
 {
